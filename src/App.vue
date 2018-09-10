@@ -37,7 +37,7 @@ export default {
           title:"云盘"
         },{
           url:'/address/',
-          title:"通讯录"  
+          title:"通讯录"
         }
       ]
     }
@@ -52,10 +52,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
   .box{
-    width:2000px;
-    height:100%;
+    width: 1903px;
+    height:985px;
     position: relative;
   }
   nav{

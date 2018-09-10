@@ -14,55 +14,61 @@ const Address = require('./components/address/address.vue')// 联系人
 // 路由配置
 const r = [
   {
-    path:'/project',
-    component:Project.default,
-    name:"项目"
-  },{
-    path:'/message',
-    component:Message.default,
-    name:"消息"
-  },{
-    path:'/network',
-    component:Network.default,
-    name:"云盘",
-          children:[
-            {
-                path: '/network/qiye',
-                component: require('./components/network/qiye/qiye.vue').default,
-                name: '企业网盘'
-            },
-            {
-                path: '/network/geren',
-                component: require('./components/network/geren/geren.vue').default,
-                name: '个人网盘'
-            },
-            {
-                path: '/network/yuwo',
-                component: require('./components/network/yuwo/yuwo.vue').default,
-                name: '与我共享'
-            },
-            {
-                path: '/network/del',
-                component: require('./components/network/del/del.vue').default,
-                name: '回收站'
-            }
-          ]
-  },{
-    path:'/address',
-    component:Address.default,
-    name:"通讯录"
-  },{
+    path: '/project',
+    component: Project.default,
+    name: "项目"
+  }, {
+    path: '/message',
+    component: Message.default,
+    name: "消息",
+    children: [
+      //配置子路由
+      {
+        path: '/message/sky',
+        component: require('./components/message/sky/sky.vue').default,
+        name: '网盘助手'
+      },
+      {
+        path: '/message/pro',
+        component: require('./components/message/pro/pro.vue').default,
+        name: '项目助手'
+      },
+      {
+        path: '/message/ent',
+        component: require('./components/message/ent/ent.vue').default,
+        name: '企业公告'
+      },
+      {
+        path: '/message/ter',
+        component: require('./components/message/ter/ter.vue').default,
+        name: '小特机器人'
+      },
+      {
+        path: '/message/day',
+        component: require('./components/message/day/day.vue').default,
+        name: '日程助手'
+      }
+    ]
+  }, {
+    path: '/network',
+    component: Network.default,
+    name: "云盘"
+  }, {
+    path: '/address',
+    component: Address.default,
+    name: "通讯录"
+  }, {
     // 如果随便输入地址,转到首页
-    path:'*',
-    redirect:'/project'
+    path: '*',
+    redirect: '/project'
   }
 ]
 // 路由初始化
 const router = new VueRouter({
-  routes:r
+  routes: r
 })
 // 设置全局守卫
-router.beforeEach((to,from,next) => {
+router.beforeEach((to, from, next) => {
   // console.log(from);
   // console.log(to);
   document.title = to.name;
@@ -70,20 +76,20 @@ router.beforeEach((to,from,next) => {
 })
 // 配置vue
 const store = new Vuex.Store({
-  state:{
-    count:1
+  state: {
+    count: 1
   },
-  mutations:{
-    ADD(state,payload){
-      console.log(state,payload)
+  mutations: {
+    ADD(state, payload) {
+      console.log(state, payload)
     }
   },
-  actions:{
-    async ADD({commit},payload){
+  actions: {
+    async ADD({ commit }, payload) {
       var data = await fetch("../data/json.json").then(res => res.json());
       console.log(payload);
-      commit("ADD",payload);
-    } 
+      commit("ADD", payload);
+    }
   }
 })
 new Vue({
@@ -91,7 +97,7 @@ new Vue({
   store,
   router,
   // render: h => h(App)
-  components:{
+  components: {
     App
   }
 })
