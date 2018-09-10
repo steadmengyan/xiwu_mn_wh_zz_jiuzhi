@@ -1,11 +1,6 @@
 <template>
     <div>
-        <div class="sun">
-
-        </div>
-        <div class="">
-
-        </div>
+        <h1>高级</h1>
     </div>
 </template>
 <script>
@@ -18,6 +13,7 @@ div{
     width: 100%;
     height: 100%;
     left: -1px;
-    background: blue;
+    background: yellowgreen;
+
 }
 </style>

@@ -8,9 +8,9 @@ Vue.use(VueRouter)// 安装路由
 // 引入子组件
 const Project = require('./components/project/project.vue')// 项目
 const Message = require('./components/message/message.vue')//消息
+// const Calendar = require('./components/calendar/calendar.vue')// 日历
 const Network = require('./components/network/network.vue')// 云盘
 const Address = require('./components/address/address.vue')// 联系人
-const Menology = require('./components/menology/menology.vue')// 日历
 // 路由配置
 const r = [
   {
@@ -22,13 +22,31 @@ const r = [
     component:Message.default,
     name:"消息"
   },{
-    path:'/menology',
-    component:Menology.default,
-    name:"日历"
-  },{
     path:'/network',
     component:Network.default,
-    name:"云盘"
+    name:"云盘",
+          children:[
+            {
+                path: '/network/qiye',
+                component: require('./components/network/qiye/qiye.vue').default,
+                name: '企业网盘'
+            },
+            {
+                path: '/network/geren',
+                component: require('./components/network/geren/geren.vue').default,
+                name: '个人网盘'
+            },
+            {
+                path: '/network/yuwo',
+                component: require('./components/network/yuwo/yuwo.vue').default,
+                name: '与我共享'
+            },
+            {
+                path: '/network/del',
+                component: require('./components/network/del/del.vue').default,
+                name: '回收站'
+            }
+          ]
   },{
     path:'/address',
     component:Address.default,
@@ -65,7 +83,7 @@ const store = new Vuex.Store({
       var data = await fetch("../data/json.json").then(res => res.json());
       console.log(payload);
       commit("ADD",payload);
-    }
+    } 
   }
 })
 new Vue({
