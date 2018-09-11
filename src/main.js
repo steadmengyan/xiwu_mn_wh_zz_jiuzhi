@@ -8,9 +8,9 @@ Vue.use(VueRouter)// 安装路由
 // 引入子组件
 const Project = require('./components/project/project.vue')// 项目
 const Message = require('./components/message/message.vue')//消息
-// const Calendar = require('./components/calendar/calendar.vue')// 日历
 const Network = require('./components/network/network.vue')// 云盘
 const Address = require('./components/address/address.vue')// 联系人
+const Menology = require('./components/menology/menology.vue')// 日历
 // 路由配置
 const r = [
   {
@@ -139,6 +139,10 @@ const r = [
     path:'/address',
     component:Address.default,
     name:"通讯录"
+  },{
+    path:'/menology',
+    component:Menology.default,
+    name:"日历"
   },{
     // 如果随便输入地址,转到首页
     path:'*',

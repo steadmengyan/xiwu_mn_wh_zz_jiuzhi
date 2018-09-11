@@ -30,7 +30,7 @@ export default {
           url:'/message/',
           title:"消息"
         },{
-          url:'/calendar/',
+          url:'/menology/',
           title:"日历"
         },{
           url:'/network/',
