@@ -243,7 +243,47 @@ const r = [
   },{
     path:'/address',
     component:Address.default,
-    name:"通讯录"
+    name:"通讯录",
+    children:[
+      {
+        path: '/address/a_jl',
+        component: require('./components/address/a_jl/a_jl.vue').default,
+        name: '独孤伽罗'
+      },
+      {
+        path: '/address/b_hh',
+        component: require('./components/address/b_hh/b_hh.vue').default,
+        name: '哈哈'
+      },
+      {
+        path: '/address/c_123',
+        component: require('./components/address/c_123/c_123.vue').default,
+        name: '123'
+      },
+      {
+        path: '/address/z_ri',
+        component: require('./components/address/z_ri/ri.vue').default,
+        name: '日程助手'
+      },
+      ,
+      {
+        path: '/address/x_wp',
+        component: require('./components/address/x_wp/wp.vue').default,
+        name: '网盘助手'
+      }
+      ,
+      {
+        path: '/address/c_xm',
+        component: require('./components/address/c_xm/xm.vue').default,
+        name: '项目助手'
+      }
+      ,
+      {
+        path: '/address/v_xt',
+        component: require('./components/address/v_xt/xt.vue').default,
+        name: '小特机器人'
+      }
+    ]
   },{
     path:'/menology',
     component:Menology.default,
