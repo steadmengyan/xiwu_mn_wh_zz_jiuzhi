@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pro">
     <h1>pro</h1>
   </div>
 </template>
@@ -9,8 +9,8 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-div {
-  width: 500px;
-  height: 120px;
+.pro {
+  width: 1200px;
+  height: 500px;
 }
 </style>

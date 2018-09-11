@@ -149,7 +149,71 @@ const r = [
   },{
     path:'/message',
     component:Message.default,
-    name:"消息"
+    name:"消息",
+    children: [
+      //配置二级子路由
+      {
+        path: '/message/sky',
+        component: require('./components/message/sky/sky.vue').default,
+        name: '网盘助手',
+        children: [
+          //配置三级子路由
+          {
+            path: '/message/sky/unread',
+            component: require('./components/message/sky/unread/unread.vue').default,
+            name: '未读',
+          },
+          {
+            path: '/message/sky/read',
+            component: require('./components/message/sky/read/read.vue').default,
+            name: '已读',
+          },
+          {
+            path: '/message/sky/todoread',
+            component: require('./components/message/sky/todoread/todoread.vue').default,
+            name: '待处理',
+          }
+        ]
+      },
+      {
+        path: '/message/pro',
+        component: require('./components/message/pro/pro.vue').default,
+        name: '项目助手'
+      },
+      {
+        path: '/message/ent',
+        component: require('./components/message/ent/ent.vue').default,
+        name: '企业公告'
+      },
+      {
+        path: '/message/ter',
+        component: require('./components/message/ter/ter.vue').default,
+        name: '小特机器人',
+        children: [
+          //配置三级子路由
+          {
+            path: '/message/ter/news',
+            component: require('./components/message/ter/news/news.vue').default,
+            name: '消息',
+          },
+          {
+            path: '/message/ter/file',
+            component: require('./components/message/ter/file/file.vue').default,
+            name: '文件',
+          },
+          {
+            path: '/message/ter/fixed',
+            component: require('./components/message/ter/fixed/fixed.vue').default,
+            name: '固定消息',
+          }
+        ]
+      },
+      {
+        path: '/message/day',
+        component: require('./components/message/day/day.vue').default,
+        name: '日程助手'
+      }
+    ]
   },{
     path:'/network',
     component:Network.default,

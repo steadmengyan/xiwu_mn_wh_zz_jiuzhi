@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="day">
     <h1>day</h1>
   </div>
 </template>
@@ -9,8 +9,4 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-div {
-  width: 500px;
-  height: 120px;
-}
 </style>

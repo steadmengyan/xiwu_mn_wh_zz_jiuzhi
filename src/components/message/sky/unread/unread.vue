@@ -1,6 +1,6 @@
 <template>
-  <div class="ent">
-    <h1>ent</h1>
+  <div class="read">
+    <h1>unread</h1>
   </div>
 </template>
 
@@ -9,8 +9,4 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-.ent {
-  width: 1200px;
-  height: 500px;
-}
 </style>
