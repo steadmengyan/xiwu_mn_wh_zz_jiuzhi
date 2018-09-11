@@ -1,18 +1,13 @@
 <template>
     <div>
-        <h1>日历</h1>
+       组件
     </div>
 </template>
 <script>
 export default {
-    
+   
 }
 </script>
 <style lang="scss" scoped >
-div{
-    width: 100%;
-    height: 100%;
-    left: -1px;
-    background: blue;
-}
+   
 </style>

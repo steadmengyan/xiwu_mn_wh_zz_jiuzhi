@@ -30,7 +30,7 @@ export default {
           url:'/message/',
           title:"消息"
         },{
-          url:'/calendar/',
+          url:'/menology/',
           title:"日历"
         },{
           url:'/network/',
@@ -52,18 +52,20 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+html{
+     overflow-y: scroll;
+}
   .box{
-    width:2000px;
-    height:100%;
+    width:1000px;
     position: relative;
   }
   nav{
-    position: absolute;
-    left:0;
-    top:0;
+    background: #22d7bb;  
     width: 70px;
-    background: #22d7bb;
+    float: left;
+    overflow-y:hidden;
+    height: 100%;
+    position: relative;
   }
   nav ul li{
     width: 70px;
@@ -74,7 +76,5 @@ export default {
     position: absolute;
     left:70px;
     top:0;
-    width:1833px;
-    height:985px;
   }
 </style>
