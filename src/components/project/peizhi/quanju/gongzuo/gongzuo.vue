@@ -1,35 +1,35 @@
 <template>
-    <div style="padding:15px;box-sizing: border-box;">
+    <div style="padding:15px;">
         <div class="module">
         <div class="left">
-             <i class="iconfont icon-sousuo1"></i>
-            <input type="text" placeholder="搜索优先级模式" >
+            <i class="iconfont icon-sousuo1"></i>
+            <input type="text" placeholder="搜索工作组件" >
         </div>
         <div class="pad">
             <table>
                 <thead>
                     <tr>
-                        <th style="width:20%">优先级模式</th>
+                        <th style="width:20%">组件名称</th>
                         <th>备注</th>
-                        <th>优先级数量</th>
+                        <th>支持平台</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody >
                     <tr v-for="item of arr">
                         <td style="text-align:left">
-                           {{item.biaoqian}}
+                            <img :src="item.i" alt="">
+                            {{item.zujian}}
                         </td>
                         <td style="text-align:left">
                             {{item.beizhu}}
                         </td>
                         <td >
-                            {{item.shu}}
+                            <i v-for="(tre,index)  of item.pingtai" :class="tre"></i>
                         </td>
-                        <td >
-                            {{item.caozuo}}
+                        <td>
+                            <span>删除</span>
                         </td>
-                        
                     </tr>
                 </tbody>
             </table>
@@ -43,23 +43,24 @@ export default {
         return{
             arr:[
                 {
-                    biaoqian:'默认优先级模式',
-                    beizhu:'默认优先级模式',
-                    shu:'5',
-                    caozuo:'配置'
+                    zujian:'下载任务',
+                    beizhu:'下载任务',
+                    pingtai:[
+                        'iconfont icon-diannao',
+                        'iconfont icon-iphone',
+                        'iconfont icon-anzhuo'
+                    ]
                 },
                 {
-                    biaoqian:'四象限优先级模式',
-                    beizhu:'四象限优先级模式',
-                    shu:'4',
-                    caozuo:'配置'
-                },
-                {
-                    biaoqian:'缺陷优先级模式',
-                    beizhu:'缺陷优先级模式',
-                    shu:'5',
-                    caozuo:'配置'
-                },
+                    zujian:'我的任务',
+                    beizhu:'我的任务',
+                    pingtai:[
+                        'iconfont icon-diannao',
+                        'iconfont icon-iphone',
+                        'iconfont icon-anzhuo'
+                    ]
+                }
+                
             ]
         }
     }
@@ -131,20 +132,10 @@ export default {
             img{
                 vertical-align: -6px;
             }
-            span{
-                padding: 5px 10px;
-            }
-            .wancheng{
-                background: rgb(232, 251, 248);
-            }
-            .weikaishi{
-                background: rgb(254, 238, 238);
-            }
-            .jinxingzhong{
-                background: rgb(255, 245, 231);
-            }
-            .guanbi{
-                background: rgb(235, 248, 238);
+            i{
+                margin-right: 3px;
+                margin-left: 3px;
+                color: #cacaca!important;
             }
         }
     }

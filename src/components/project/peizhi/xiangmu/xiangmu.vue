@@ -21,7 +21,7 @@ export default {
                 title:"组件管理"
                 },{
                 url:'/project/peizhi/xiangmu/baobiao',
-                title:"报表"
+                title:"报表管理"
                 }
             ]
         }

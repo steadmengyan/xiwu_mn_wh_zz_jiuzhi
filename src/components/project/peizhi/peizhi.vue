@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="header">
-            <span>配置中心</span>
+            <span><i class="iconfont icon-shezhi"></i> 配置中心</span>
             <ul>
-               <li @click="routerGo(item.url)" v-for="item of tabNav" :class="{cur : item.title==$route.name}">{{item.title}}</li>
+               <li @click="routerGo(item.url)" v-for="item of tabNav" :class="{cur :$route.path.indexOf(item.url) != -1}">{{item.title}}</li>
             </ul>
         </div>
         <div class="body">
@@ -17,7 +17,7 @@ export default {
         return {
             tabNav:[
                 {
-                url:'/project/peizhi/xiangmu/xiangmu',
+                url:'/project/peizhi/xiangmu',
                 title:"项目",
                 },{
                 url:'/project/peizhi/renwu',
@@ -37,9 +37,9 @@ export default {
     },
     methods:{
         routerGo(url){
-        // 路由跳转
-        this.$router.push({path:url});
-        // console.log(this.$route)
+            // 路由跳转
+            this.$router.push({path:url});
+            // console.log(this.$route)
         }
     }
 }
@@ -54,6 +54,9 @@ export default {
         span{
             float: left;
         }
+    }
+    .icon-shezhi{
+        color: #22d7bb;
     }
     ul{
         overflow: hidden;

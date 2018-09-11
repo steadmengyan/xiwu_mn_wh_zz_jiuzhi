@@ -40,7 +40,7 @@ const r = [
               },
               {
                 path:'/project/peizhi/xiangmu/baobiao',
-                name:'报表',
+                name:'报表管理',
                 component:require('./components/project/peizhi/xiangmu/baobiao/baobiao.vue').default,
               }
             ]
@@ -86,16 +86,57 @@ const r = [
             path:'/project/peizhi/anquan',
             name:'安全',
             component:require('./components/project/peizhi/anquan/anquan.vue').default,
+            children:[
+              {
+                path:'/project/peizhi/anquan/juese',
+                name:'角色管理',
+                component:require('./components/project/peizhi/anquan/juese/juese.vue').default,
+              },
+              {
+                path:'/project/peizhi/anquan/anquan',
+                name:'安全管理',
+                component:require('./components/project/peizhi/anquan/anquan/anquan.vue').default,
+              },
+              {
+                path:'/project/peizhi/anquan/quanxian',
+                name:'权限管理',
+                component:require('./components/project/peizhi/anquan/quanxian/quanxian.vue').default,
+              },
+            ]
           },
           {
             path:'/project/peizhi/gaoji',
             name:'高级',
             component:require('./components/project/peizhi/gaoji/gaoji.vue').default,
+            children:[
+              {
+                path:'/project/peizhi/gaoji/tixing',
+                name:'提醒管理',
+                component:require('./components/project/peizhi/gaoji/tixing/tixing.vue').default,
+              },
+              {
+                path:'/project/peizhi/gaoji/tongzhi',
+                name:'通知管理',
+                component:require('./components/project/peizhi/gaoji/tongzhi/tongzhi.vue').default,
+              },
+              {
+                path:'/project/peizhi/gaoji/shijian',
+                name:'事件管理',
+                component:require('./components/project/peizhi/gaoji/shijian/shijian.vue').default,
+              },
+            ]
           },
           {
             path:'/project/peizhi/quanju',
             name:'全局',
             component:require('./components/project/peizhi/quanju/quanju.vue').default,
+            children:[
+              {
+                path:'/project/peizhi/quanju/gongzuo',
+                name:'全局',
+                component:require('./components/project/peizhi/quanju/gongzuo/gongzuo.vue').default,
+              }
+            ]
           }
         ]
       },

@@ -3,28 +3,32 @@
         <div class="module">
         <div class="left">
              <i class="iconfont icon-sousuo1"></i>
-            <input type="text" placeholder="搜索优先级模式" >
+            <input type="text" placeholder="搜索安全模式" >
         </div>
         <div class="pad">
             <table>
                 <thead>
                     <tr>
-                        <th style="width:20%">优先级模式</th>
+                        <th style="width:20%">安全模式</th>
                         <th>备注</th>
-                        <th>优先级数量</th>
+                        <th>角色模式</th>
+                        <th>默认</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody >
                     <tr v-for="item of arr">
                         <td style="text-align:left">
-                           {{item.biaoqian}}
+                           {{item.anquan}}
                         </td>
                         <td style="text-align:left">
                             {{item.beizhu}}
                         </td>
                         <td >
-                            {{item.shu}}
+                            {{item.moshi}}
+                        </td>
+                        <td >
+                            {{item.moren}}
                         </td>
                         <td >
                             {{item.caozuo}}
@@ -43,23 +47,17 @@ export default {
         return{
             arr:[
                 {
-                    biaoqian:'默认优先级模式',
-                    beizhu:'默认优先级模式',
-                    shu:'5',
+                    anquan:'通用安全模式',
+                    beizhu:'通用安全模式',
+                    moshi:'通用角色模式',
                     caozuo:'配置'
                 },
                 {
-                    biaoqian:'四象限优先级模式',
-                    beizhu:'四象限优先级模式',
-                    shu:'4',
+                    anquan:'软件安全模式',
+                    beizhu:'软件开发中的安全管理',
+                    moshi:'软件角色模式',
                     caozuo:'配置'
-                },
-                {
-                    biaoqian:'缺陷优先级模式',
-                    beizhu:'缺陷优先级模式',
-                    shu:'5',
-                    caozuo:'配置'
-                },
+                }
             ]
         }
     }

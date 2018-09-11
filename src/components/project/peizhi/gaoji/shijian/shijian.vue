@@ -3,28 +3,32 @@
         <div class="module">
         <div class="left">
              <i class="iconfont icon-sousuo1"></i>
-            <input type="text" placeholder="搜索优先级模式" >
+            <input type="text" placeholder="搜索任务事件" >
         </div>
         <div class="pad">
             <table>
                 <thead>
                     <tr>
-                        <th style="width:20%">优先级模式</th>
+                        <th style="width:20%">任务事件</th>
                         <th>备注</th>
-                        <th>优先级数量</th>
+                        <th>分组</th>
+                        <th>类型</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody >
                     <tr v-for="item of arr">
                         <td style="text-align:left">
-                           {{item.biaoqian}}
+                           {{item.renwu}}
                         </td>
                         <td style="text-align:left">
                             {{item.beizhu}}
                         </td>
                         <td >
-                            {{item.shu}}
+                            {{item.fenzu}}
+                        </td>
+                        <td >
+                            {{item.leixing}}
                         </td>
                         <td >
                             {{item.caozuo}}
@@ -43,22 +47,39 @@ export default {
         return{
             arr:[
                 {
-                    biaoqian:'默认优先级模式',
-                    beizhu:'默认优先级模式',
-                    shu:'5',
-                    caozuo:'配置'
+                    renwu:'创建任务',
+                    beizhu:'创建任务',
+                    fenzu:'基本事件',
+                    caozuo:'——',
+                    leixing:'系统'
                 },
                 {
-                    biaoqian:'四象限优先级模式',
-                    beizhu:'四象限优先级模式',
-                    shu:'4',
-                    caozuo:'配置'
+                    renwu:'删除任务',
+                    beizhu:'删除任务',
+                    fenzu:'基本事件',
+                    caozuo:'——',
+                    leixing:'系统'
                 },
                 {
-                    biaoqian:'缺陷优先级模式',
-                    beizhu:'缺陷优先级模式',
-                    shu:'5',
-                    caozuo:'配置'
+                    renwu:'归档任务',
+                    beizhu:'归档任务',
+                    fenzu:'基本事件',
+                    caozuo:'——',
+                    leixing:'系统'
+                },
+                {
+                    renwu:'评论任务',
+                    beizhu:'评论任务',
+                    fenzu:'基本事件',
+                    caozuo:'——',
+                    leixing:'系统'
+                },
+                {
+                    renwu:'点赞任务',
+                    beizhu:'点赞任务',
+                    fenzu:'基本事件',
+                    caozuo:'——',
+                    leixing:'系统'
                 },
             ]
         }

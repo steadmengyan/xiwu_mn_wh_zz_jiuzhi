@@ -6,10 +6,11 @@
             </div>
             <div class="body-list">
                 <div class="search">
+                    <i class="iconfont icon-sousuo1"></i>
                     <input type="text" placeholder="搜索任务">
                 </div>
                 <ul>
-                    <li  v-for="item of tabNav" :class="{cur : item.title==$route.name}" @click="routerGo(item.url)">{{item.title}}</li>
+                    <li  v-for="item of tabNav" :class="{cur :$route.path.indexOf(item.url) != -1}" @click="routerGo(item.url)"><i :class="item.leiming"></i> {{item.title}}</li>
                 </ul>
             </div>
         </div>
@@ -25,10 +26,12 @@ export default {
             tabNav:[
                 {
                 url:'/project/peizhi',
-                title:"配置中心"
+                title:"配置中心",
+                leiming:'iconfont icon-shezhi'
                 },{
                 url:'/project/huishou',
-                title:"回收站"
+                title:"回收站",
+                leiming:'iconfont icon-delete'
                 }
             ]
         }
@@ -66,7 +69,13 @@ export default {
     }
     .body-list{
         .search{
+            position: relative;
             padding: 0 20px 10px;
+            i{
+                position: absolute;
+                top: 62px;
+                left: 30px;
+            }
             input{
                 background: #f3f3f3;
                 box-shadow: none;

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="header">
-            回收站
+            <i class="iconfont icon-delete"></i> 回收站
         </div>
         <div class="body">
             <div class="box">
@@ -23,5 +23,7 @@ export default {
         line-height: 50px;
         box-sizing: border-box;
     }
-    
+    .icon-delete{
+        color: #22d7bb;
+    }
 </style>
