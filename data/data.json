@@ -1,0 +1,85 @@
+{
+  "mythings": [
+    {
+      "title": "貂蝉",
+      "start": 20180907,
+      "end": 20180909,
+      "color": "#ad4",
+      "id": 1
+    },
+    {
+      "title": "杨贵妃",
+      "start": 20180913,
+      "end": 20180917,
+      "color": "#ad4",
+      "id": 2
+    },
+    {
+      "title": "高圆圆",
+      "start": 201809020,
+      "end": 20180925,
+      "color": "#ad4",
+      "id": 3
+    },
+    {
+      "start": 20180913,
+      "end": 20180911,
+      "color": "red",
+      "id": "7ci6lkzx",
+      "title": ""
+    }
+  ],
+  "teamthings": [
+    {
+      "title": "杨过",
+      "start": 20180907,
+      "end": 20180909,
+      "color": "#ad4",
+      "id": 1
+    },
+    {
+      "title": "小龙女",
+      "start": 20180913,
+      "end": 20180917,
+      "color": "#ad4",
+      "id": 2
+    },
+    {
+      "title": "吕不韦",
+      "start": 201809020,
+      "end": 20180925,
+      "color": "#ad4",
+      "id": 3
+    }
+  ],
+  "peoplethings": [
+    {
+      "title": "郭靖",
+      "start": 20180907,
+      "end": 20180909,
+      "color": "#ad4",
+      "id": 1
+    },
+    {
+      "title": "黄蓉",
+      "start": 20180913,
+      "end": 20180917,
+      "color": "#ad4",
+      "id": 2
+    },
+    {
+      "title": "梅超风",
+      "start": 201809020,
+      "end": 20180925,
+      "color": "#ad4",
+      "id": 3
+    }
+  ],
+  "actionthings": {
+    "start": 20180913,
+    "end": 20180911,
+    "color": "red",
+    "id": "7ci6lkzx",
+    "title": ""
+  }
+}

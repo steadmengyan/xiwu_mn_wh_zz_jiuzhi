@@ -78,7 +78,7 @@ div.doyofschedule{
 </template>
 <script>
 export default {
-    props:["theyear","themonth"],
+    props:["theyear","themonth","downda"],
     data(){
         return {
             year:2018,
@@ -88,27 +88,95 @@ export default {
             ed:'',
             things:[
                 {
-                    title:'这是一个事务',
-                    start:20171203,
-                    end:20171205
-                },
-                {
-                    title:'这是一个事务1',
-                    start:20180107,
-                    end:20180109
-                },
-                {
-                    title:'这是一个事务2',
-                    start:20180908,
-                    end:20180915
+                    "title":"貂蝉",
+                    "start":20180907,
+                    "end":20180909,
+                    "color":"#ad4",
+                    "id":1
+                },{
+                    "title":"杨贵妃",
+                    "start":20180913,
+                    "end":20180917,
+                    "color":"#ad4",
+                    "id":2
+                },{
+                    "title":"高圆圆",
+                    "start":201809020,
+                    "end":20180925,
+                    "color":"#ad4",
+                    "id":3
                 }
-            ]
+            ],
+            downdata:"my",
+            onlyshowone:[]
+        }
+    },
+    beforeCreate(){
+        // 鸟也执行不了
+        console.log("我我我执行了");
+        return this.$store.dispatch("XGETALL");
+    },
+    created() {
+        // 发送默认 GETALL
+        // console.log(this.mythings,this.teamthings,this.peoplethings)
+        // console.log(this.downdata)
+        if(this.downda=="my"){
+            this.things = this.$store.state.mythings;
+            console.log(this.things);
+        }else if(this.downda=="team"){
+            this.things = this.$store.state.teamthings;
+            console.log(this.things);
+        }else if(this.downda=="people"){
+            this.things = this.$store.state.peoplethings;
+            console.log(this.things);
+        }else{
+            this.things = this.$store.state.actionthings;
+            console.log(this.things);
+        }
+        // this.$store.dispatch("XGETALL");
+        // if(this.downdata=="my"){
+        //     this.things = this.$store.state.mythings;
+        //     console.log(this.things,this.$store.state.mythings);
+        // }else if(this.downdata=="team"){
+        //     this.things = this.$store.state.teamthings;
+        //     console.log(this.things);
+        // }else{
+        //     this.things = this.$store.state.peoplethings;
+        //     console.log(this.things);
+        // }
+        // console.log("我执行了");
+    },
+    updated(){
+        console.log(this.downdata);
+        this.downdata = this.downda;
+        if(this.downda =="my"){
+            this.things = this.$store.state.mythings;
+            // console.log(this.things,this.$store.state.mythings);
+        }else if(this.downda =="team"){
+            this.things = this.$store.state.teamthings;
+            // console.log(this.things);
+        }else if(this.downda=="people"){
+            this.things = this.$store.state.peoplethings;
+            console.log(this.things);
+        }else{
+            this.things = this.$store.state.actionthings;
+            console.log(this.things);
+            // this.year = this.things.toString().substr(0,4);
+            // this.month = this.things.toString().substr(4,2);
         }
     },
     computed:{
         calender(){
             this.year = this.theyear;
             this.month = this.themonth;
+            this.downdata = this.downda;
+            this.onlyshowone = this.$store.state.actionthings;
+            // if(this.onlyshowone.length>0){
+            //     this.things = this.onlyshowone;
+            //     // var start=new Date(item.start.toString().substr(0,4),item.start.toString().substr(4,2)-1,item.start.toString().substr(6,2));
+            //     this.year = this.things.toString().substr(0,4);
+            //     this.month = this.things.toString().substr(4,2);
+            // }
             var arr=[];
             // console.log(this.theyear,this.themonth);
             //new Date 有三个参数：参数1，年；参数2，月；参数3，默认是1，如果是0，表示上个月的最后一天，-1，前两天，3，后天
@@ -157,10 +225,12 @@ export default {
                 })
                 _a++
             }
-            console.log(arr);
+            // console.log(arr);
             return arr;
         },
         schedule(){
+            // console.log(this.downdata,this.downda,this.things);
+            
             var arr=[];//里边放的box
             //事物
             for(var i=0; i<this.calender.length/7; i++){
@@ -177,8 +247,10 @@ export default {
                     }
                 }
             }
-            console.log(arr);
+            // console.log(arr);
+            // console.log(this.things);
             //处理事务  things
+            console.log(this.things);
             this.things.forEach(item => {
                 //开始日期时间戳
                 var start=new Date(item.start.toString().substr(0,4),item.start.toString().substr(4,2)-1,item.start.toString().substr(6,2));
@@ -235,6 +307,16 @@ export default {
                 })
             })
             return arr;
+        },
+        theupdata(){
+            if(this.downdata=="my"){
+                this.things = this.$store.state.mythings;
+            }else if(this.downdata=="team"){
+                this.things = this.$store.state.teamthings;
+            }else{
+                this.things = this.$store.state.peoplethings;
+            }
+            console.log(this.things);
         }
     }
 }

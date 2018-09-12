@@ -287,7 +287,18 @@ const r = [
   },{
     path:'/menology',
     component:Menology.default,
-    name:"日历"
+    name:"日历",
+    children:[
+      {
+        path:'/menology/week',
+        component:require('./components/menology/week/week.vue').default,
+        name:"周",
+      },{
+        path:'/menology/day',
+        component:require('./components/menology/day/day.vue').default,
+        name:"日",
+      }
+    ]
   },{
     // 如果随便输入地址,转到首页
     path:'*',
@@ -308,11 +319,53 @@ router.beforeEach((to,from,next) => {
 // 配置vue
 const store = new Vuex.Store({
   state:{
-    count:1
+    count:1,
+    allthings:[],
+    mythings:[],
+    teamthings:[],
+    peoplethings:[],
+    actionthings:[]
   },
   mutations:{
     ADD(state,payload){
       console.log(state,payload)
+    },
+    XGETALL(state,payload){
+      state.mythings = payload[0];
+      state.teamthings = payload[1];
+      state.peoplethings = payload[2];
+      var arrlist = [];
+      for(var i=0;i<payload[0].length;i++){
+        arrlist.push(payload[0][i]);
+      }
+      for(var a=0;a<payload[1].length;a++){
+        arrlist.push(payload[1][a]);
+      }
+      for(var b=0;b<payload[2].length;b++){
+        arrlist.push(payload[2][b]);
+      }
+      state.allthings = arrlist;
+      console.log(state.mythings,state.peoplethings,state.teamthings);
+    },
+    XGETMY(state,payload){
+      state.mythings = payload;
+      console.log(state.mythings);
+    },
+    XGETTEAM(state,payload){
+      state.teamthings = payload;
+      console.log(state.teamthings);
+    },
+    XGETPEOPLE(state,payload){
+      state.peoplethings = payload;
+      console.log(state.peoplethings);
+    },
+    XCHANGE(state,payload){
+      state.actionthings=[];
+      state.actionthings.push(payload);
+    },
+    XADDMY(state,payload){
+      state.mythings.push(payload);
+      console.log(state.mythings,payload);
     }
   },
   actions:{
@@ -320,7 +373,46 @@ const store = new Vuex.Store({
       var data = await fetch("../data/json.json").then(res => res.json());
       console.log(payload);
       commit("ADD",payload);
-    } 
+    },
+    async XGETMY({commit},payload){
+      var data = await fetch("/mythings").then(res => res.json());
+			commit("XGETMY",data)
+    },
+    async XGETTEAM({commit},payload){
+      var data = await fetch("/teamthings").then(res => res.json());
+			commit("XGETATEAM",data)
+    },
+    async XGETPEOPLE({commit},payload){
+      var data = await fetch("/peoplethings").then(res => res.json());
+			commit("XGETAPEOPLE",data)
+    },
+    async XGETALL({commit},payload){
+      var data1 = await fetch("/mythings").then(res => res.json());
+      var data2 = await fetch("/teamthings").then(res => res.json());
+      var data3 = await fetch("/peoplethings").then(res => res.json());
+      var arrlist = [data1,data2,data3];
+			commit("XGETALL",arrlist);
+    },
+    async XCHANGE({commit},payload){
+      var data = await fetch("/actionthings/",{
+				"method" :"POST",
+				"headers":{
+					"Content-Type": "application/json"
+				},
+				body:JSON.stringify(payload)
+			}).then(res => res.json()); 
+			commit("XCHANGE",data);
+    },
+    async XADDMY({commit},payload){
+      var data = await fetch("/mythings/",{
+				"method" :"POST",
+				"headers":{
+					"Content-Type": "application/json"
+				},
+				body:JSON.stringify(payload)
+			}).then(res => res.json()); 
+			commit("XADDMY",data);
+    }
   }
 })
 new Vue({
