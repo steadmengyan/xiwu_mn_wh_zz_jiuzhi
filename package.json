@@ -16,6 +16,7 @@
     "vue": "^2.5.11",
     "vue-cli": "^2.9.6",
     "vue-router": "^3.0.1",
+    "vue2-animate": "^2.1.0",
     "vuex": "^3.0.1"
   },
   "browserslist": [

@@ -68,7 +68,7 @@ div.doyofschedule{
         <div class="box" v-for="item of schedule">
             <table>
                 <tr v-for="child of item">
-                    <td v-for="txt of child" :style="{width:223 * txt.colspan + 'px'}" :colspan="txt.colspan" :class="{cur:txt.title}">{{txt.title}}</td>
+                    <td v-for="txt of child" :style="{width:223 * txt.colspan + 'px',height:'30px',background:txt.color}" :colspan="txt.colspan" :class="{cur:txt.title}" @dblclick="updataboxshow">{{txt.title}}</td>
                 </tr>
             </table>
         </div>
@@ -88,26 +88,35 @@ export default {
             ed:'',
             things:[
                 {
-                    "title":"貂蝉",
-                    "start":20180907,
-                    "end":20180909,
-                    "color":"#ad4",
-                    "id":1
-                },{
-                    "title":"杨贵妃",
-                    "start":20180913,
-                    "end":20180917,
-                    "color":"#ad4",
-                    "id":2
-                },{
-                    "title":"高圆圆",
-                    "start":201809020,
-                    "end":20180925,
-                    "color":"#ad4",
-                    "id":3
+                    "title": "貂蝉",
+                    "start": 20180907,
+                    "end": 20180909,
+                    "color": "#ad4",
+                    "id": 1
+                },
+                {
+                    "title": "杨贵妃",
+                    "start": 20180913,
+                    "end": 20180917,
+                    "color": "#ad4",
+                    "id": 2
+                },
+                {
+                    "title": "高圆圆",
+                    "start": 20180920,
+                    "end": 20180925,
+                    "color": "#ad4",
+                    "id": 3
+                },
+                {
+                    "start": 20180911,
+                    "end": 20180913,
+                    "color": "red",
+                    "id": "0krwms00",
+                    "title": "笑眯眯"
                 }
             ],
-            downdata:"my",
+            downdata:"",
             onlyshowone:[]
         }
     },
@@ -120,6 +129,7 @@ export default {
         // 发送默认 GETALL
         // console.log(this.mythings,this.teamthings,this.peoplethings)
         // console.log(this.downdata)
+        this.downdata = this.downda;
         if(this.downda=="my"){
             this.things = this.$store.state.mythings;
             console.log(this.things);
@@ -273,6 +283,7 @@ export default {
                                     var nowWeekDuring=during + week[i][j].week <= 7 ? during : 7-week[i][j].week;
                                     //设置title
                                     week[i][j].title=item.title;
+                                    week[i][j].color=item.color;
                                     //设置持续时间
                                     week[i][j].colspan=nowWeekDuring;
                                     //删除后边的
@@ -295,6 +306,7 @@ export default {
                                             //weekidx 是起始周  count垮了几周
                                             arr[weekidx+count][n][0].title=item.title;
                                             arr[weekidx+count][n][0].colspan=nextWeekDuring;
+                                            arr[weekidx+count][n][0].color=item.color;
                                             arr[weekidx+count][n].splice(1,nextWeekDuring-1);
                                             break;
                                         }
@@ -306,6 +318,7 @@ export default {
                     }
                 })
             })
+            console.log(arr,this.things);
             return arr;
         },
         theupdata(){
@@ -317,6 +330,11 @@ export default {
                 this.things = this.$store.state.peoplethings;
             }
             console.log(this.things);
+        }
+    },
+    methods:{
+        updataboxshow(){
+            this.$emit("sunchildaddstr","true");
         }
     }
 }

@@ -2,7 +2,7 @@
     <div class="box">
         <div class="sun">
             <div class="s_header">
-                <span>日历<i class="iconfont icon-rili"></i></span>
+                <span>日历<i @click="smallnewmonshow = true" class="iconfont icon-rili"></i></span>
             </div>
             <div class="s_menlogy">
                 <p class="s_m_title">
@@ -40,24 +40,26 @@
                 </div>
             </div>
             <div class="myday">
-                <p @click="mythingsshowfun"><i></i>我的日程<b></b></p>
-                <transition name="fade">
-                    <ul v-show="mythingsshow" transiton="fade">
-                        <li v-for="item of mythings" @click="adddaythings(item)" ><i></i>{{item.title}}<b></b></li>
+                <p @click="mythingsshowfun"><i class="iconfont icon-shu"></i>我的日程<b class="iconfont icon-wifi"></b></p>
+                <ul v-show="mythingsshow"  class=" animated fadeInLeft">
+                    <li v-for="item of mythings" @click="adddaythings(item)" ><i :style="{background:item.color}"></i>{{item.title}}<b></b></li>
+                </ul>
+                <p @click="teamthingsshowfun"><i class="iconfont icon-xiaotuziCduan_"></i>团队日程<b @click="mydayhideshow = !mydayhideshow" class="iconfont icon-diandiandian"></b></p>
+                <ul v-show="teamthingsshow"  class=" animated fadeInLeft">
+                    <li v-for="item of teamthings" @click="adddaythings(item)"><i :style="{background:item.color}"></i>{{item.title}}<b></b></li>
+                </ul>
+                <p @click="peoplethingsshowfun"><i class="iconfont icon-xiaotuziCduan_"></i>成员日程<b class="iconfont icon-iconjia"></b></p>
+                <ul v-show="peoplethingsshow"  class=" animated fadeInLeft">
+                    <li v-for="item of peoplethings" @click="adddaythings(item)"><i :style="{background:item.color}"></i>{{item.title}}<b></b></li>
+                </ul>
+                <div class="mydayhide" v-show="mydayhideshow">
+                    <ul>
+                        <li @click="smallnewmonshowandmydayhideshow">创建新日历</li>
+                        <li>日历设置</li>
+                        <li>显示全部日历</li>
+                        <li>订阅日程</li>
                     </ul>
-                </transition>
-                <p @click="teamthingsshowfun"><i></i>团队日程<b></b></p>
-                <transition name="fade">
-                    <ul v-show="teamthingsshow" transiton="fade">
-                        <li v-for="item of teamthings" @click="adddaythings(item)"><i></i>{{item.title}}<b></b></li>
-                    </ul>
-                </transition>
-                <p @click="peoplethingsshowfun"><i></i>成员日程<b></b></p>
-                <transition name="fade">
-                    <ul v-show="peoplethingsshow" transiton="fade">
-                        <li v-for="item of peoplethings" @click="adddaythings(item)"><i></i>{{item.title}}<b></b></li>
-                    </ul>
-                </transition>
+                </div>
             </div>
         </div>
         <div class="moon">
@@ -80,25 +82,29 @@
                 </div>
             </div>
             <div class="moon_content">
-                <sunday :theyear="theyear" :themonth="themonth" :downda="downda"></sunday>
+                <sunday :theyear="theyear" :themonth="themonth" :downda="downda"  v-on:sunchildaddstr="sunchildaddstr"></sunday>
                 <div class="router_box" v-show="changemonthweekday" >
                     <router-view></router-view>
                 </div>
             </div>
         </div>
-        <div class="newschedule_box" v-show="newscheduleboxshow" @scroll="woListScroll($event)">
-            <div class="newschedule" :class="{opennewschedule : opennewshow}">
+        <div class="newschedule_box animated fadeInDown" v-show="newscheduleboxshow" @scroll="woListScroll($event)">
+            <!-- <div class="newschedule"  :class="{'animated fadeInDown' : newscheduleboxshow}"> -->
+            <div class="newschedule">
                 <h3>新建日程 <span @click="newscheduleboxshow = !newscheduleboxshow">X</span></h3>
                 <input class="new_out_in" type="text" placeholder="日程安排,如下午02:00例会" v-model="addstr">
                 <p>
                     <span>日历</span>
-                    <input type="text" value="会议安排">
+                    <!-- <input type="text" value="会议安排"> -->
+                    <select> 
+                        <option v-for="item of teamthings" value ="item.title">{{item.title}}</option>
+                    </select>
                 </p>
                 <p>
                     <span>开始日期</span>
-                    <button>2018-09-12 08:10</button>
+                    <button @click="leftsmallshow = !leftsmallshow">2018-09-12 08:10</button>
                     <span>结束日期</span>
-                    <button>2018-09-12 08:40</button><br>
+                    <button @click="rightsmallshow = !rightsmallshow">2018-09-12 08:40</button><br>
                     <span></span>全天
                 </p>
                 <p>
@@ -116,25 +122,56 @@
                     <p><span>地点</span><input type="text"></p>
                     <p><span>重复</span><a href="#">从不重复</a></p>
                     <p><span>提醒</span><a >+添加新提醒</a></p>
-                    <p><span>描述</span><input type="text"></p>
+                    <p><span>描述</span>
+                        <input type="text" v-show="inputatextareashow" @click="inputatextareashow = false">
+                        <textarea name="" v-show="!inputatextareashow" id="" cols="60" rows="10" @blur="inputatextareashow = true"></textarea>
+                    </p>
                     <p><span></span>仅参考者可见</p>
                 </div>
                 <p>
-                    <!-- <span></span> -->
+                    <span></span>
                     <button @click="postadddata">确定</button>
                     <button>取消</button>
                 </p>
-                <div class="posasmall">
+                <div class="posasmall" v-show="leftsmallshow">
                     <mysmall v-on:childaddstr="childaddstr"></mysmall>
                 </div>
-                <div class="rightposasmall">
+                <div class="rightposasmall" v-show="rightsmallshow">
                     <mysmall v-on:childaddstr="childaddstr"></mysmall>
                 </div>
             </div>
         </div>
+        <div class="smallnewmon_box  animated fadeInDown" v-show="smallnewmonshow">
+            <div class="smallnewmon">
+                <h3>新建日历<span @click="smallnewmonshow = false">X</span></h3>
+                <input type="text" v-model="surenewdayvalue" class="new_out_in">
+                <p>
+                    <b v-for="(item,index) of colorlist" :style="{background:'#'+item}" :class="{'iconfont icon-duihao':index==theindexnumber}" @click="changcoloridx(index)"></b>
+                </p>
+                <p>
+                    <span>可见范围</span>
+                    <select> 
+                        <option>公开 : 企业所有成员都可以看见此日历</option>
+                        <option>私有 : 只有加入的成员才能看见此日历</option>
+                    </select>
+                </p>
+                <p>
+                    <span>日历成员</span>
+                    <i>M</i>
+                    <b>+</b>
+                </p>
+                <p>
+                    <span></span>
+                    <button @click="surenewday">确定</button>
+                    <button>取消</button>
+                </p>
+            </div>
+        </div>
+        
     </div>
 </template>
 <script>
+import 'vue2-animate/dist/vue2-animate.min.css';
 import sunday from "./sunday/sunday.vue";
 import mysmall from "./small/small.vue";
 export default {
@@ -155,11 +192,20 @@ export default {
             mythingsshow:false,
             teamthingsshow:false,
             peoplethingsshow:false,
+            theindexnumber:1,
             mythings:[],
             teamthings:[],
             peoplethings:[],
             startenddata:[],
-            downda:"my", 
+            leftsmallshow:false,
+            rightsmallshow:false,
+            inputatextareashow:true,
+            smallnewmonshow:false,
+            mydayhideshow:false,
+            MonthLengthnow:0,
+            surenewdayvalue:"",
+            // updataboxshow:false,
+            downda:"", 
             thingslist:[
                 {
                     url:'/menology/week/',
@@ -168,6 +214,9 @@ export default {
                     url:'/menology/day/',
                     title:"日",
                 }
+            ],
+            colorlist:[
+                "189582","18bfa4","2cccda","2bdcff","4e8af9","7076fa","9473fd","c472ee","ef7ede","f969aa","fc587b","fa5a55","ff7747","ffa415","ffd234","99075a","66c060","39ba5a"
             ]
         }
     },
@@ -177,7 +226,7 @@ export default {
     beforeCreate(){
         this.$store.dispatch("XGETALL");
     },
-    updated() {
+    updated(){
         // 发送默认 GETALL
         // console.log(this.$store.state.mythings,this.$store.state.teamthings,this.$store.state.peoplethings)   
         this.mythings = this.$store.state.mythings;
@@ -192,6 +241,7 @@ export default {
             var nowMonthLength= new Date(this.year,this.month,0).getDate();
             var nowMonthFirstWeek = new Date(this.year,this.month-1).getDay();
             var lastMonthLength= new Date(this.year,this.month-1,0).getDate();
+            this.MonthLengthnow = nowMonthFirstWeek;
             //每个月的上一个月是那一年的哪一个月
             var pmonth=this.month==1?12:this.month-1;
             //上一年
@@ -359,6 +409,16 @@ export default {
             this.themonth = item.end.toString().substr(4,2);
             console.log(this.theyear,this.themonth)
         },
+        myadddaythings(item){
+            if(item.isshow){
+                this.$store.dispatch("XMYCHANGE",item);
+            }else{
+                this.$store.dispatch("XMYCHANGE",item);
+                this.downda="qita";
+                this.theyear = item.start.toString().substr(0,4);
+                this.themonth = item.end.toString().substr(4,2);
+            }
+        },
         woListScroll(event) {
             if (event.srcElement.scrollHeight - (event.srcElement.scrollTop + event.srcElement.clientHeight) == 0) {
             　　console.log(event);
@@ -366,11 +426,12 @@ export default {
             console.log(event);
         },
         postadddata(){
+            this.newscheduleboxshow = !this.newscheduleboxshow;
             var startnum;
             var endnum;
             var a = parseInt(this.startenddata[this.startenddata.length-1]);
             var b = parseInt(this.startenddata[this.startenddata.length-2]);
-            if(a>b){
+            if(a<b){
                 startnum = a;
                 endnum = b;
             }else{
@@ -395,6 +456,45 @@ export default {
         childaddstr(data){
             console.log(data);
             this.startenddata.push(data);
+        },
+        sunchildaddstr(data){
+            this.newscheduleboxshow = data;
+            console.log(data)
+        },
+        changcoloridx(index){
+            this.theindexnumber = index;
+        },
+        smallnewmonshowandmydayhideshow(){
+            this.smallnewmonshow = true;
+            this.mydayhideshow = false;
+        },
+        surenewday(){
+            var idnum = '';
+            var strhei = "741852qwertyuioplkjhgfdszxcvbnm0963";
+            for(var i = 0; i < 8; i++) {
+                idnum+= strhei[~~(Math.random() * strhei.length)]
+            }
+            var indexnum;
+            var monthnum;
+            if(this.MonthLengthnow<10){
+                indexnum = "0"+this.MonthLengthnow;
+            }else{
+                indexnum = this.MonthLengthnow;
+            }
+            if(this.month<10){
+                monthnum = "0"+this.month;
+            }else{
+                monthnum = this.month;
+            }
+            var str = this.year.toString()+monthnum.toString()+indexnum.toString();
+            var o = {
+                title:this.surenewdayvalue,
+                color:"#"+this.colorlist[this.theindexnumber],
+                start:str,
+                end:str,
+                id:idnum
+            }
+            this.$store.dispatch("XADDDATA",o);
         }
     }
 }
@@ -425,6 +525,14 @@ export default {
         color: #333;
         line-height: 50px;
         font-size: 16px;
+        width:calc(100% - 40px);
+        i{
+            float:right;
+            color:#ddd;
+        }
+        i:hover{
+            color:#22D7BB;
+        }
     }
     a{
         float:right;
@@ -498,6 +606,7 @@ export default {
 .myday{
     width:100%;
     text-align:left;
+    position: relative;
     p{
         width: 98%;
         height:40px;
@@ -526,6 +635,26 @@ export default {
         width: 14px;
         height: 15px;
         margin: 5px 10px 0 10px;
+    }
+    b{
+        float:right;
+        width: 14px;
+        height: 15px;
+        margin: 0 10px 0 10px;
+    }
+    .mydayhide{
+        position: absolute;
+        width:240px;
+        height: 161px;
+        background-color: #fff;
+        left:215px;
+        z-index:999;
+        top:0;
+        border:1px solid #ccc;
+        li{
+            width:220px;
+            padding-left: 20px;
+        }
     }
 }
 .m_header{
@@ -680,7 +809,7 @@ export default {
             }
         }
         p:nth-child(3){
-            input{
+            select{
                 width:475px;
                 height: 38px;
                 padding-left:20px;
@@ -833,15 +962,146 @@ export default {
         }
     }
 }
+.smallnewmon_box{
+    position: absolute;
+    left:-100px;
+    top:-100px;
+    width:2000px;
+    height:1200px;
+    background-color: rgba(178,178,178,.6);
+    .smallnewmon{
+        position: absolute;
+        left:35%;
+        top:200px;
+        width: 660px;
+        height: 483px;
+        background-color: #fff;
+        border-radius:10px;
+        box-shadow:0 0 5px 5px rgb(178,178,178);
+        h3{
+            width: 100%;
+            height:50px;
+            padding:0 30px;
+            line-height:50px;
+            font-weight:400;
+            border-bottom:1px solid #ccc;
+            span{
+                float:right;
+                width:15px;
+                height: 15px;
+                margin: 0 50px 0 0;
+            }
+        }
+        .new_out_in{
+            display: block;
+            width: 580px;
+            padding-left:20px;
+            height: 38px;
+            margin:20px auto;
+            line-height: 1.5;
+            color: #333;
+            background-color: #fff;
+            background-clip: padding-box;
+            border-radius: .25rem;
+        }
+        input{
+            border: 1px solid #eee;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        input:hover{
+            border-color:#22D7BB;
+        }
+        p{
+            span:first-child{
+                display:inline-block;
+                width:120px;
+                text-align:right;
+                height:38px;
+                margin:5px 0;
+            }
+        }
+        select{
+            width:475px;
+            height: 38px;
+            padding-left:20px;
+        }
+        p:nth-child(3){
+            b:first-child{
+                margin-left: 20px;
+            }
+            b{
+                display:inline-block;
+                width: 25px;
+                height: 25px;
+                border-radius:50%;
+                margin:0 5px;
+            }
+        }
+        p:nth-child(5){
+            line-height:48px;
+            i{
+                display:inline-block;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 12px;
+                border-radius: 30px;
+                background-color: rgb(239, 126, 222);
+                vertical-align:middle;
+                text-align:center;
+                color:#fff;
+                margin: 0 5px;
+                font-style:normal;
+            }
+            b{
+                display:inline-block;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 12px;
+                border-radius: 30px;
+                border:1px dashed #ccc;
+                vertical-align:middle;
+                text-align:center;
+                color:#ccc;
+                margin: 0 5px;
+                font-size:20px;
+                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            }
+            b:hover{
+                border-color:#22D7BB;
+                color:#22D7BB;
+            }
+        }
+        p:last-child{
+            button{
+                width: 106px;
+                height: 38px;
+                color: #fff;
+                background-color: #22d7bb;
+                border-color: #22d7bb;
+                border-radius:20px;
+                border:none;
+                outline:none;
+            }
+            button:hover{
+                box-shadow:0 0 5px 2px #22d7bb;
+            }
+            button:last-child{
+                color:#ccc;
+                background-color: #fff;
+                margin-left: 10px;
+            }
+            button:last-child:hover{
+                box-shadow:0 0 0 0 #fff;
+                color:#22d7bb;
+            }
+        }
+    }
+}
 .fontweekday{
     color:#333;
     text-decoration:none;
-}
-.fade-enter-active, .fade-leave-active {
-    transition: all .5s ease 0s;
-}
-.fade-enter, .fade-leave-active {
-    opacity: 0
 }
 .posasmall{
     position: absolute;

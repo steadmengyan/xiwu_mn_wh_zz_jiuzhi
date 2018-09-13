@@ -572,6 +572,23 @@ const store = new Vuex.Store({
       state.mythings.push(payload);
       console.log(state.mythings, payload);
     },
+    XADDDATA(state,payload){
+      state.teamthings.push(payload);
+      console.log(state.teamthings,payload);
+    },
+    // XPEOPLECHANGE  XTEAMCHANGE
+    XMYCHANGE(state,payload){
+      state.mylist.push(payload);
+      console.log(state.mylist,payload);
+    },
+    XPEOPLECHANGE(state,payload){
+      state.teamlist.push(payload);
+      console.log(state.teamlist,payload);
+    },
+    XTEAMCHANGE(state,payload){
+      state.peoplelist.push(payload);
+      console.log(state.peoplelist,payload);
+    },
     GETALL(state, payload) {
       state.todos = payload;
     }
@@ -614,7 +631,7 @@ const store = new Vuex.Store({
       commit("ADD", payload);
     },
     async XGETMY({ commit }, payload) {
-      var data = await fetch("/mythings").then(res => res.json());
+      var data = await fetch("/myxthings").then(res => res.json());
       commit("XGETMY", data)
     },
     async XGETTEAM({ commit }, payload) {
@@ -626,7 +643,7 @@ const store = new Vuex.Store({
       commit("XGETAPEOPLE", data)
     },
     async XGETALL({ commit }, payload) {
-      var data1 = await fetch("/mythings").then(res => res.json());
+      var data1 = await fetch("/myxthings").then(res => res.json());
       var data2 = await fetch("/teamthings").then(res => res.json());
       var data3 = await fetch("/peoplethings").then(res => res.json());
       var arrlist = [data1, data2, data3];
@@ -643,7 +660,7 @@ const store = new Vuex.Store({
       commit("XCHANGE", data);
     },
     async XADDMY({ commit }, payload) {
-      var data = await fetch("/mythings/", {
+      var data = await fetch("/myxthings/", {
         "method": "POST",
         "headers": {
           "Content-Type": "application/json"
@@ -651,6 +668,54 @@ const store = new Vuex.Store({
         body: JSON.stringify(payload)
       }).then(res => res.json());
       commit("XADDMY", data);
+    },
+    async XADDDATA({commit},payload){
+      var data = await fetch("/teamthings/",{
+				"method" :"POST",
+				"headers":{
+					"Content-Type": "application/json"
+				},
+				body:JSON.stringify(payload)
+			}).then(res => res.json()); 
+			commit("XADDDATA",data);
+    },
+    async XMYCHANGE({commit},payload){
+      var data = await fetch("/actionthings/",{
+				"method" :"POST",
+				"headers":{
+					"Content-Type": "application/json"
+				},
+				body:JSON.stringify(payload)
+			}).then(res => res.json()); 
+			commit("XMYCHANGE",data);
+    },
+    async XTEAMCHANGE({commit},payload){
+      var data = await fetch("/actionthings/",{
+				"method" :"POST",
+				"headers":{
+					"Content-Type": "application/json"
+				},
+				body:JSON.stringify(payload)
+			}).then(res => res.json()); 
+			commit("XTEAMCHANGE",data);
+    },
+    async XPEOPLECHANGE({commit},payload){
+      var data = await fetch("/actionthings/",{
+				"method" :"POST",
+				"headers":{
+					"Content-Type": "application/json"
+				},
+				body:JSON.stringify(payload)
+			}).then(res => res.json()); 
+			commit("XPEOPLECHANGE",data);
+    }
+  },
+  getters:{
+    my : function(state){
+			console.log("我执行了",state.mythings);
+    },
+    team : function(state){
+			console.log("我执行了",state.mythings);
     }
   }
 })

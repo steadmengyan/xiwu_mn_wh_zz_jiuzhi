@@ -21,139 +21,46 @@
       "sj": "14:12"
     }
   ],
-  "mythings": [
+  "myxthings": [
     {
       "title": "貂蝉",
       "start": 20180907,
       "end": 20180909,
-      "color": "#ad4",
-      "id": 1
+      "color": "#098876",
+      "id": 1,
+      "isshow": true
     },
     {
       "title": "杨贵妃",
       "start": 20180913,
       "end": 20180917,
-      "color": "#ad4",
-      "id": 2
+      "color": "#246783",
+      "id": 2,
+      "isshow": true
     },
     {
       "title": "高圆圆",
-      "start": 201809020,
+      "start": 20180920,
       "end": 20180925,
-      "color": "#ad4",
-      "id": 3
+      "color": "#123456",
+      "id": 3,
+      "isshow": true
     },
     {
-      "start": 20180913,
-      "end": 20180911,
+      "start": 20180911,
+      "end": 20180913,
       "color": "red",
-      "id": "7ci6lkzx",
-      "title": ""
+      "id": "0krwms00",
+      "title": "笑眯眯",
+      "isshow": true
     },
     {
-      "start": 20180906,
-      "end": 20180903,
-      "color": "red",
-      "id": "n9m5stv2",
-      "title": ""
-    },
-    {
-      "start": 20180906,
-      "end": 20180903,
-      "color": "red",
-      "id": "fki06uij",
-      "title": ""
-    },
-    {
-      "start": 20180906,
-      "end": 20180903,
-      "color": "red",
-      "id": "qmovgyod",
-      "title": ""
-    },
-    {
-      "start": 20180906,
-      "end": 20180903,
-      "color": "red",
-      "id": "o7i86y55",
-      "title": ""
-    },
-    {
-      "start": 20180906,
-      "end": 20180903,
-      "color": "red",
-      "id": "33icuchq",
-      "title": ""
-    },
-    {
-      "start": 20180930,
-      "end": 20180903,
-      "color": "red",
-      "id": "cqo5dqjw",
-      "title": ""
-    },
-    {
-      "start": 20180930,
-      "end": 20180903,
-      "color": "red",
-      "id": "mv057nmc",
-      "title": ""
-    },
-    {
-      "start": 20180930,
-      "end": 20180903,
-      "color": "red",
-      "id": "orrnxfnh",
-      "title": ""
-    },
-    {
-      "start": 20180930,
-      "end": 20180903,
-      "color": "red",
-      "id": "x6zpnukq",
-      "title": ""
-    },
-    {
-      "start": 20180930,
-      "end": 20180903,
-      "color": "red",
-      "id": "95gr4bbd",
-      "title": ""
-    },
-    {
-      "start": 20180930,
-      "end": 20180903,
-      "color": "red",
-      "id": "b6cmgw5n",
-      "title": ""
-    },
-    {
-      "start": 20180930,
-      "end": 20180903,
-      "color": "red",
-      "id": "jiwlhitg",
-      "title": ""
-    },
-    {
-      "start": 20180930,
-      "end": 20180903,
-      "color": "red",
-      "id": "nffcmv02",
-      "title": ""
-    },
-    {
-      "start": 20180916,
-      "end": 20180905,
-      "color": "red",
-      "id": "4jm1xo1g",
-      "title": ""
-    },
-    {
-      "start": 20180916,
-      "end": 20180905,
-      "color": "red",
-      "id": "fn7psnfi",
-      "title": ""
+      "start": 20180925,
+      "end": 20180928,
+      "color": "#234356",
+      "id": "o1e4yexi",
+      "title": "孙尚香",
+      "isshow": true
     }
   ],
   "teamthings": [
@@ -161,53 +68,84 @@
       "title": "杨过",
       "start": 20180907,
       "end": 20180909,
-      "color": "#ad4",
-      "id": 1
+      "color": "#123456",
+      "id": 1,
+      "isshow": true
     },
     {
       "title": "小龙女",
       "start": 20180913,
       "end": 20180917,
-      "color": "#ad4",
-      "id": 2
+      "color": "#234567",
+      "id": 2,
+      "isshow": true
     },
     {
-      "title": "吕不韦",
-      "start": 201809020,
+      "title": "李莫愁",
+      "start": 20180920,
       "end": 20180925,
-      "color": "#ad4",
-      "id": 3
+      "color": "#345678",
+      "id": 3,
+      "isshow": true
+    },
+    {
+      "start": 20180911,
+      "end": 20180913,
+      "color": "red",
+      "id": "0krwms00",
+      "title": "大雕",
+      "isshow": true
+    },
+    {
+      "title": "小鲁班",
+      "color": "#2bdcff",
+      "start": "20180906",
+      "end": "20180906",
+      "id": "b472057y",
+      "isshow": true
     }
   ],
   "peoplethings": [
     {
-      "title": "郭靖",
+      "title": "猪八戒",
       "start": 20180907,
       "end": 20180909,
-      "color": "#ad4",
-      "id": 1
+      "color": "#123456",
+      "id": 1,
+      "isshow": true
     },
     {
-      "title": "黄蓉",
+      "title": "唐三藏",
       "start": 20180913,
       "end": 20180917,
-      "color": "#ad4",
-      "id": 2
+      "color": "#134534",
+      "id": 2,
+      "isshow": true
     },
     {
-      "title": "梅超风",
-      "start": 201809020,
+      "title": "孙悟空",
+      "start": 20180920,
       "end": 20180925,
-      "color": "#ad4",
-      "id": 3
+      "color": "#134562",
+      "id": 3,
+      "isshow": true
+    },
+    {
+      "start": 20180911,
+      "end": 20180913,
+      "color": "red",
+      "id": "0krwms00",
+      "title": "二郎神",
+      "isshow": true
     }
   ],
   "actionthings": {
+    "title": "杨贵妃",
     "start": 20180913,
-    "end": 20180911,
-    "color": "red",
-    "id": "7ci6lkzx",
-    "title": ""
+    "end": 20180917,
+    "color": "#246783",
+    "id": 2,
+    "isshow": true
   },
   "mYthings": [
     {
