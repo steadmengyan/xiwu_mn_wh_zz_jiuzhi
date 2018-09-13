@@ -19,6 +19,9 @@ export default {
 
 <style>
     .zong{
+        width: 100%;
+        position: absolute;
+        left: 24%;
         height: 30px;
         margin-top: 10px;
         margin-bottom: 20px;
@@ -38,9 +41,12 @@ export default {
    }
     
     .kang{
-        width: 657%;
+        /* width: 657%; */
+        width: 100%;
         height: 563px;
         border: 15px solid #ccc;
+        position: absolute;
+        /* left: 24%; */
     }
     .kang span img{
         margin-top: 25px;

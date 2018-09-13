@@ -45,8 +45,7 @@
                 <div class="add_list_ul">
                     <ul>
                         <li v-for="item of M" :class="['btn' , {vcur : $route.name.indexOf(item.title) != -1}]">
-                             <span><img :src="item.img"></span>
-                             <!-- <img src="../../assets/MM.png"> -->
+                             <img src="../../assets/MM.png">
                             <router-link :to='item.url' class="xt">{{item.title}}</router-link>
                         </li>
                     </ul>   
@@ -80,29 +79,29 @@ export default {
                  {
                     title:'日程助手',
                     url:'/address/z_ri',
-                    img:'/dist/ri.png?a697c1a66d6108af69d45deea584d4ac'
+                    img:'https://s3.cn-north-1.amazonaws.com.cn/lcavatar/calendar_40x40.png'
                 },
                 {
                     title:'网盘助手',
                     url:'/address/x_wp',
-                    img:'/dist/3.png?a697c1a66d6108af69d45deea584d4ac'
+                    img:'https://s3.cn-north-1.amazonaws.com.cn/lcavatar/drive_40x40.png'
                 },
                 {
                     title:'项目助手',
                     url:'/address/c_xm',
-                    img:'/dist/xm.png?a697c1a66d6108af69d45deea584d4ac'
+                    img:'https://s3.cn-north-1.amazonaws.com.cn/lcavatar/mission_40x40.png'
                 },
                 {
                     title:'小特机器人',
                     url:'/address/v_xt',
-                    img:'/dist/xt.png?a697c1a66d6108af69d45deea584d4ac'
+                    img:'https://s3.cn-north-1.amazonaws.com.cn/lcavatar/381df779-62e6-49de-8792-620b94a5582d_40x40.png'
                 }
             ],
             M:[
                  {
                     title:'M',
                     url:'/address/M',
-                    img:'/dist/MM.png?a697c1a66d6108af69d45deea584d4ac'
+                    img:'/dist/MM.png'
                 }
             ],
             isShow:true,
@@ -243,6 +242,13 @@ html{
     .add_list_ul ul  li{
         height: 30px;
     }
+    .add_list_ul ul  li img{
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        border-radius: 24px;
+    }
     .add_list_ul {
         // overflow: hidden;
         // transition: all 3s ease;
@@ -257,7 +263,8 @@ html{
         }
     }
 .rv{
-    float: left;
+    width: 100%;
+    // float: left;
 }
 .lk{
     position: relative;

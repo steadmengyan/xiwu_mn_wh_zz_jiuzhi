@@ -1,8 +1,8 @@
 <template>
       <div class="da">
           <div class="shang">
-              <img src="../../../assets/ke.png">
-              <p>项目助手</p>
+              <img src="../../../assets/wp.png">
+              <p>网盘助手</p>
               <span>@bot_mission</span>
               <div class="xian"></div>
           <div class="xia">

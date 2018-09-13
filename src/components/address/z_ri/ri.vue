@@ -2,7 +2,7 @@
       <div class="da">
           <div class="shang">
               <img src="../../../assets/rili.png">
-              <p>项目助手</p>
+              <p>日程助手</p>
               <span>@bot_calendar</span>
               <div class="xian"></div>
           <div class="xia">
@@ -26,13 +26,16 @@ export default {
 
 <style>
     .da{
-        width: 1024px;
+        /* width: 1024px; */
+        width: 100%;
+        left: 24%;
         height: 601px;
         border:15px solid #ccc;
         position: absolute;
     }
     .shang{
-        width: 620px;
+        /* width: 620px; */
+        width: 100%;
         height: 250px;
         margin: 65px 40%;
         position: relative; 

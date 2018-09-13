@@ -81,12 +81,15 @@ export default {
     }
     .ba{
         width: 1055px;
+        /* width: 100%; */
+        left: 24%;
         height: 800px;
         position: absolute;
         /* background-color: #ccc; */
     }
      .top{
         width: 1055px;
+        /* width: 100%; */
         height: 200px;
         position: relative;
         background-color:pink;
