@@ -518,7 +518,8 @@ const store = new Vuex.Store({
     actionthings: [],
     todos: [],
     rytodos: [],
-    YJHtodos:[]
+    YJHtodos:[],
+    wangpanfile: []
   },
   mutations: {
     YJHGETALL(state, payload) {
@@ -544,6 +545,19 @@ const store = new Vuex.Store({
     ryADD(state, payload) {
       state.rytodos.push(payload);
     },
+    GETFILE(state, payload) {
+      state.wangpanfile = payload;
+    },
+    ADDFILT(state, payload) {
+      state.wangpanfile.push(payload);
+    },
+    DELFILE(state, payload) {
+      state.wangpanfile = state.wangpanfile.filter(item => {
+        return item.id != payload.id
+      })
+    },
+
+
     ADD(state, payload) {
       console.log(state, payload)
     },
@@ -655,6 +669,31 @@ const store = new Vuex.Store({
       }).then(res => res.json());
       commit("ryADD", data);
     },
+    async GETFILE(context, payload) {
+      // 请求数据
+      var data = await fetch('/ryItem/').then(res => res.json());
+      context.commit('GETFILE', data);
+    },
+    async ADDFILT({ commit }, payload) {
+      var data = await fetch('/ryItem/', {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": JSON.stringify(payload)
+      }).then(res => res.json());
+      commit('ADDFILT', data);
+    },
+    async DELFILE({ commit }, payload) {
+      // 发送delete请求到json-server服务器,自动帮我们删除这条数据,操作data.json文件
+      var data = await fetch('/ryItem/' + payload.id, {
+        "method": "DELETE"
+      }).then(res => res.json());
+      commit('DELFILE', payload);
+    },
+
+
+    
     async GETALL(context, payload) {
       //请求数据
       var data = await fetch('/YmYthings/').then(res => res.json());
