@@ -72,7 +72,6 @@ export default {
     }
     .xia span:nth-child(2){
     margin-left: 45px;
-    /* margin-top: 60px; */
     width: 300px;
     font-size: 15px;
     color: #666;
