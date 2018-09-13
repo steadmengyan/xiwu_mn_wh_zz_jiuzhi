@@ -182,9 +182,6 @@ const r = [
               component: require('./components/address/M/M.vue').default,
               name: 'M'
             }
-            
-            
-
           ]
   },{
     path:'/menology',
