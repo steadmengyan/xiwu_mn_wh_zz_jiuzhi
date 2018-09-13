@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="nav">
-        <h1><span>与我共享</span></h1>
+        <h1><span>缺陷管理</span></h1>
         <div class="wj">
             <span class="jxw"><i class="iconfont icon-jiahao" id="jia"></i><b>新建</b></span>
             <div class="rig">

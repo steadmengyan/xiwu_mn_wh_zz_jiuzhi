@@ -519,7 +519,8 @@ const store = new Vuex.Store({
     todos: [],
     rytodos: [],
     YJHtodos:[],
-    wangpanfile: []
+    wangpanfile: [],
+    wtodos: []
   },
   mutations: {
     YJHCHANGETITLE(state, payload){
@@ -630,6 +631,18 @@ const store = new Vuex.Store({
     },
     GETALL(state, payload) {
       state.todos = payload;
+    },
+    whGETALL(state, payload) {
+      state.wtodos = payload;
+    },
+    whDEL(state, payload) {
+      state.wtodos = state.wtodos.filter(item => {
+        return item.id != payload.id;
+      })
+    },
+
+    whADD(state, payload) {
+      state.wtodos.push(payload);
     }
   },
   actions: {
@@ -811,7 +824,33 @@ const store = new Vuex.Store({
 				body:JSON.stringify(payload)
 			}).then(res => res.json()); 
 			commit("XPEOPLECHANGE",data);
+    },
+    async whGETALL(context, payload) {
+      //请求数据
+      var data = await fetch('/toods/').then(res => res.json());
+      console.log(data);
+      context.commit('whGETALL', data);
+    },
+    async whDEL({ commit }, payload) {
+      //发送delete请求到json-server服务器,自动帮我删除这条数据,操作 data.json文件
+      var data = await fetch('/toods/' + payload.id, {
+        "method": "DELETE"
+      }).then(res => res.json());
+      commit("whDEL", payload);
+    },
+
+    async whADD({ commit }, payload) {
+      //上传数据
+      var data = await fetch('/toods/', {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": JSON.stringify(payload)
+      }).then(res => res.json());
+      commit("whADD", data);
     }
+
   },
   getters:{
     my : function(state){

@@ -4,7 +4,6 @@
             <div class="left">
                 <div class="le-t">
                     <span class="title" translate="modules.DRIVE">网盘</span>
-
                 </div>
                 <div class="le-b">
                     <div class="screr">
@@ -15,7 +14,7 @@
                             <router-link :to='item.url' class="lvl0 "><span class="title"><i :class="item.class" ></i>{{item.title}}</span></router-link>      
                               <div class="secon" v-show="xs">
                                 <ul>
-                                   <li @click="routerGo1(item.url)" v-for="(item,index) of list"> 
+                                   <li @click="routerGo1(item.url)" v-for="(item,index) of wtodos"> 
                                         <a href="javascript:;" class="lvl0"><span class="title"><i class="iconfont icon-wenjian"></i>{{item.title}}</span></a>  
                                     </li>
                                 </ul>
@@ -39,20 +38,20 @@
 export default {
       data () {
           return{
-               list:[
-               {
-                   title:'资料共享',
-                   url: '/network/qiye/guanli/'    
-               },
-               {
-                   title:'缺陷管理',
-                   url:'/network/qiye/gongxiang/'   
-               },
-               {
-                   title:'公司制度',
-                   url:'/network/qiye/zhidu/'   
-               }
-           ],
+        //        list:[
+        //        {
+        //            title:'资料共享',
+        //            url: '/network/qiye/guanli/'    
+        //        },
+        //        {
+        //            title:'缺陷管理',
+        //            url:'/network/qiye/gongxiang/'   
+        //        },
+        //        {
+        //            title:'公司制度',
+        //            url:'/network/qiye/zhidu/'   
+        //        }
+        //    ],
             json:[
                {
                    title:'企业网盘',
@@ -82,13 +81,20 @@ export default {
                 {
                    title:'回收站',
                    url:'/network/del/',
-                   class:'iconfont icon-fenxiang'     
+                   class:'iconfont icon-huishouzhan'     
                }
            ],
               isShow:0,
               xs:false
           }
   },
+  computed: {
+      wtodos() {
+           
+         return this.$store.state.wtodos;
+      }
+   
+    },
   methods:{
     routerGo(url){
       
@@ -121,13 +127,12 @@ export default {
 .min-body{
     width: 1850px;
     height:684px;
-    background-color:red;
+ 
 }
 .left{
     width: 240px;
     height: 684px;
     float: left;
-    background-color: yellowgreen;
 }
 .le-t{
     width: 239px;
@@ -144,7 +149,7 @@ export default {
 .le-b .fist .secon{
     margin-left:15px;
     width: 240px;
-    height:120px;
+    height:auto;
     // background-color: salmon;
 }
 
@@ -230,10 +235,9 @@ list-style: none;
          color: rgb(102, 192, 96);
     }
 .rv{
-  
     float: left;
     width: 1610px;
-    height: 642px;
+    height: 900px;
     background-color:#ddd;;
 }
 </style>
