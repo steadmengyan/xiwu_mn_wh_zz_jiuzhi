@@ -17,10 +17,9 @@
                 </div>
             </div>
             <div class="add_list">
-                <a href="#">群组</a>
-                <div class="add_list_ul">
+                <a href="#" @click="show()" class="zuqun">群组</a>
+                <div class="add_list_ul" v-show="!isShow" :style='{height:count}'>
                     <ul>
-                        
                         <li v-for="item of vList" :class="['btn' , {vcur : $route.name.indexOf(item.title) != -1}]">
                              <span><img src="../../assets/1.png"></span>
                             <router-link :to='item.url' class="lk">{{item.title}}</router-link>
@@ -29,12 +28,25 @@
                 </div>
             </div>
             <div class="add_list">
-                <a href="#">机器人</a>
-                <div class="add_list_ul">
+                <a href="#" @click="show1()">机器人</a>
+                <div class="add_list_ul" v-show="!isShow1" :style="{height:height1}">
                     <ul>
                         <li v-for="item of List" :class="['btn' , {vcur : $route.name.indexOf(item.title) != -1}]">
                              <span><img :src="item.img"></span>
                              <!-- <img src="../../assets/xt.png"> -->
+                            <router-link :to='item.url' class="xt">{{item.title}}</router-link>
+                        </li>
+                    </ul>   
+                </div>
+            </div>
+             <div class="add_list2">
+                <a href="#" class="M">M</a>
+                <div class="xianx"></div>
+                <div class="add_list_ul">
+                    <ul>
+                        <li v-for="item of M" :class="['btn' , {vcur : $route.name.indexOf(item.title) != -1}]">
+                             <span><img :src="item.img"></span>
+                             <!-- <img src="../../assets/MM.png"> -->
                             <router-link :to='item.url' class="xt">{{item.title}}</router-link>
                         </li>
                     </ul>   
@@ -68,31 +80,80 @@ export default {
                  {
                     title:'日程助手',
                     url:'/address/z_ri',
-                    img:'/dist/ri.png'
+                    img:'/dist/ri.png?a697c1a66d6108af69d45deea584d4ac'
                 },
                 {
                     title:'网盘助手',
                     url:'/address/x_wp',
-                    img:'/dist/3.png'
+                    img:'/dist/3.png?a697c1a66d6108af69d45deea584d4ac'
                 },
                 {
                     title:'项目助手',
                     url:'/address/c_xm',
-                    img:'/dist/xm.png?'
+                    img:'/dist/xm.png?a697c1a66d6108af69d45deea584d4ac'
                 },
                 {
                     title:'小特机器人',
                     url:'/address/v_xt',
-                    img:'/dist/xt.png?'
+                    img:'/dist/xt.png?a697c1a66d6108af69d45deea584d4ac'
                 }
-            ]
+            ],
+            M:[
+                 {
+                    title:'M',
+                    url:'/address/M',
+                    img:'/dist/MM.png?a697c1a66d6108af69d45deea584d4ac'
+                }
+            ],
+            isShow:true,
+            isShow1:true,
+            height1:0,
+            count:0
+        }
+    },
+    methods:{
+        show:function(){
+            this.isShow = !this.isShow;
+            if(this.count == 0){ 
+                this.count = this.vList.length *  30 + 'px'
+            }else{
+                this.count = 0;
+            }
+        },
+        show1:function(){
+            this.isShow1 = !this.isShow1;
+            if(this.height1 == 0){ 
+                this.height1 = this.List.length *  30 + 'px'
+            }else{
+                this.height1 = 0;
+            }
         }
     }
 }
 </script>
 <style lang="scss" scoped >
+
 html{
      overflow-y: scroll;
+}
+.add_list{
+    margin: 10px;
+}
+.add_list2{
+    margin: 10px;
+    margin-left: 25px;
+}
+.add_list a{
+    width: 240px;
+    height: 39px;
+    font-size: 13px;
+}
+.xianx{
+    // display: inline-block;
+    width: 180px;
+    height: 20px;
+    border-top:1px solid #ccc;
+    
 }
 .main{
     width: 1000px;
@@ -104,7 +165,6 @@ html{
     height:800px;
     border-right:1px solid #ccc;
     background-color:rgba(253,253,253,.95);
-    // position: relative;
     float: left;
 }
 .main .main-left .header{
@@ -180,6 +240,22 @@ html{
        position: relative;
        left:5px; 
     }
+    .add_list_ul ul  li{
+        height: 30px;
+    }
+    .add_list_ul {
+        // overflow: hidden;
+        // transition: all 3s ease;
+        animation: add 1s  alternate forwards;
+    } 
+    @keyframes add{
+        0%{
+            height: 0;
+        }
+        100%{
+            height: 90px;
+        }
+    }
 .rv{
     float: left;
 }
@@ -192,7 +268,6 @@ html{
 .add_list{
     position: relative;
     left:7px;
-    
 }
 .add_list a{
     list-style: none;
@@ -212,8 +287,13 @@ html{
        left:5px; 
        margin-bottom: 10px;
        margin-top: 10px;
+}
+.M{
+        display: block;
+        line-height: 48px;
+        color: #666;
+        font-size: 14px;
+        text-decoration: none;
     }
-
-
 </style>
 
