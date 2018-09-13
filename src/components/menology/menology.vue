@@ -5,9 +5,9 @@
                 <span>日历<i class="iconfont icon-rili"></i></span>
             </div>
             <div class="s_menlogy">
-                <p class="s_m_title" @click="changemonthyear">
+                <p class="s_m_title">
                     <button @click="minusmonth" class="lbtn">&lt;</button>
-                    <span>{{year}}年{{month}}月</span>
+                    <span @click="changemonthyear">{{year}}年{{month}}月</span>
                     <button @click="addmonth" class="rbtn">&gt;</button>
                 </p>
                 <table>
@@ -40,12 +40,24 @@
                 </div>
             </div>
             <div class="myday">
-                <p><i></i>我的日程<b></b></p>
-                <ul>
-                    <li v-for="item of things"><i></i>{{item}}<b></b></li>
-                </ul>
-                <p><i></i>团队日程<b></b></p>
-                <p><i></i>成员日程<b></b></p>
+                <p @click="mythingsshowfun"><i></i>我的日程<b></b></p>
+                <transition name="fade">
+                    <ul v-show="mythingsshow" transiton="fade">
+                        <li v-for="item of mythings" @click="adddaythings(item)" ><i></i>{{item.title}}<b></b></li>
+                    </ul>
+                </transition>
+                <p @click="teamthingsshowfun"><i></i>团队日程<b></b></p>
+                <transition name="fade">
+                    <ul v-show="teamthingsshow" transiton="fade">
+                        <li v-for="item of teamthings" @click="adddaythings(item)"><i></i>{{item.title}}<b></b></li>
+                    </ul>
+                </transition>
+                <p @click="peoplethingsshowfun"><i></i>成员日程<b></b></p>
+                <transition name="fade">
+                    <ul v-show="peoplethingsshow" transiton="fade">
+                        <li v-for="item of peoplethings" @click="adddaythings(item)"><i></i>{{item.title}}<b></b></li>
+                    </ul>
+                </transition>
             </div>
         </div>
         <div class="moon">
@@ -59,47 +71,119 @@
                     <button @click="theaddmonth"  class="rbtn">&gt;</button>
                 </div>
                 <div class="m_h_right">
-                    <button>新建日程</button>
+                    <button @click="newscheduleboxshow = true">新建日程</button>
                     <ul>
-                        <li>月</li>
-                        <li>周</li>
-                        <li>日</li>
+                        <li @click="changemonthweekdayfun(false)">月</li>
+                        <li @click="changemonthweekdayfun(true)"><router-link :to="thingslist[0].url" class="fontweekday">周</router-link></li>
+                        <li @click="changemonthweekdayfun(true)"><router-link :to="thingslist[1].url" class="fontweekday">日</router-link></li>
                     </ul>
                 </div>
             </div>
             <div class="moon_content">
-                <sunday :theyear="theyear" :themonth="themonth" ></sunday>
+                <sunday :theyear="theyear" :themonth="themonth" :downda="downda"></sunday>
+                <div class="router_box" v-show="changemonthweekday" >
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
+        <div class="newschedule_box" v-show="newscheduleboxshow" @scroll="woListScroll($event)">
+            <div class="newschedule" :class="{opennewschedule : opennewshow}">
+                <h3>新建日程 <span @click="newscheduleboxshow = !newscheduleboxshow">X</span></h3>
+                <input class="new_out_in" type="text" placeholder="日程安排,如下午02:00例会" v-model="addstr">
+                <p>
+                    <span>日历</span>
+                    <input type="text" value="会议安排">
+                </p>
+                <p>
+                    <span>开始日期</span>
+                    <button>2018-09-12 08:10</button>
+                    <span>结束日期</span>
+                    <button>2018-09-12 08:40</button><br>
+                    <span></span>全天
+                </p>
+                <p>
+                    <span>参与人</span>
+                    <i>M</i><b>+</b>
+                </p>
+                <p>
+                    <span></span>
+                    <a @click="opennewshow = !opennewshow">添加更多选项</a>
+                </p>
+                <div class="open_newschedule" v-show="opennewshow">
+                    <p>
+                        <span></span>打开日程排期小助手
+                    </p>
+                    <p><span>地点</span><input type="text"></p>
+                    <p><span>重复</span><a href="#">从不重复</a></p>
+                    <p><span>提醒</span><a >+添加新提醒</a></p>
+                    <p><span>描述</span><input type="text"></p>
+                    <p><span></span>仅参考者可见</p>
+                </div>
+                <p>
+                    <!-- <span></span> -->
+                    <button @click="postadddata">确定</button>
+                    <button>取消</button>
+                </p>
+                <div class="posasmall">
+                    <mysmall v-on:childaddstr="childaddstr"></mysmall>
+                </div>
+                <div class="rightposasmall">
+                    <mysmall v-on:childaddstr="childaddstr"></mysmall>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
 import sunday from "./sunday/sunday.vue";
+import mysmall from "./small/small.vue";
 export default {
     data(){
         return {
             year:2018,
             month:9,
-            theyearandmonth:{
-                theyear:"2018",
-                themonth:"9"
-            },
             theyear:2018,
             themonth:9,
+            addstr:"",
             monthlist:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
             statesshow:0,
             monthshow:false,
             yearshow:false,
-            things:[
-                "貂蝉",
-                "杨贵妃",
-                "高圆圆",
-                "西施"
+            changemonthweekday:false,
+            opennewshow:false,
+            newscheduleboxshow:false,
+            mythingsshow:false,
+            teamthingsshow:false,
+            peoplethingsshow:false,
+            mythings:[],
+            teamthings:[],
+            peoplethings:[],
+            startenddata:[],
+            downda:"my", 
+            thingslist:[
+                {
+                    url:'/menology/week/',
+                    title:"周",
+                },{
+                    url:'/menology/day/',
+                    title:"日",
+                }
             ]
         }
     },
     components:{
-        sunday
+        sunday,mysmall
+    },
+    beforeCreate(){
+        this.$store.dispatch("XGETALL");
+    },
+    updated() {
+        // 发送默认 GETALL
+        // console.log(this.$store.state.mythings,this.$store.state.teamthings,this.$store.state.peoplethings)   
+        this.mythings = this.$store.state.mythings;
+        this.teamthings = this.$store.state.teamthings;
+        this.peoplethings = this.$store.state.peoplethings;
+        // console.log("我执行了")
     },
     computed:{
         calender(){
@@ -150,7 +234,6 @@ export default {
                 })
                 _a++
             }
-            // console.log(this.returnyear)
             return arr;
         },
         returnyear(){
@@ -216,7 +299,7 @@ export default {
         },
         changmonth(index){
             this.month = index+1;
-            console.log(this.month)
+            // console.log(this.month)
             this.yearshow = false;
             this.monthshow = false;
             this.statesshow = 0;
@@ -230,7 +313,10 @@ export default {
                 this.yearshow = true;
                 this.monthshow = false;
                 this.statesshow=0;
+                // console.log("我执行了");
             }else{
+                this.yearshow = false;
+                this.monthshow = false;
                 this.statesshow=0;
             }
         },
@@ -242,7 +328,73 @@ export default {
                 numindex = index;
             }
             this.year = parseInt("20"+numindex);
-            console.log(this.year);
+            // console.log(this.year);
+            this.yearshow = false;
+            this.monthshow = false;
+            this.statesshow=0;
+        },
+        changemonthweekdayfun(obj){
+            this.changemonthweekday = obj;
+            // console.log(this.changemonthweekday);
+        },
+        mythingsshowfun(){
+            this.mythingsshow = !this.mythingsshow;
+            this.downda="my";
+            console.log(this.downda)
+        },
+        teamthingsshowfun(){
+            this.teamthingsshow = !this.teamthingsshow;
+            this.downda="team";
+            console.log(this.downda)
+        },
+        peoplethingsshowfun(){
+            this.peoplethingsshow = !this.peoplethingsshow;
+            this.downda="people";
+            console.log(this.downda)
+        },
+        adddaythings(item){
+            this.$store.dispatch("XCHANGE",item);
+            this.downda="qita";
+            this.theyear = item.start.toString().substr(0,4);
+            this.themonth = item.end.toString().substr(4,2);
+            console.log(this.theyear,this.themonth)
+        },
+        woListScroll(event) {
+            if (event.srcElement.scrollHeight - (event.srcElement.scrollTop + event.srcElement.clientHeight) == 0) {
+            　　console.log(event);
+            }
+            console.log(event);
+        },
+        postadddata(){
+            var startnum;
+            var endnum;
+            var a = parseInt(this.startenddata[this.startenddata.length-1]);
+            var b = parseInt(this.startenddata[this.startenddata.length-2]);
+            if(a>b){
+                startnum = a;
+                endnum = b;
+            }else{
+                startnum = b;
+                endnum =a;
+            }
+            var idnum = '';
+            var str = "741852qwertyuioplkjhgfdszxcvbnm0963";
+            for(var i = 0; i < 8; i++) {
+                idnum+= str[~~(Math.random() * str.length)]
+            }
+            var obj = {
+                start:startnum,
+                end:endnum,
+                color:"red",
+                id:idnum,
+                title:this.addstr
+            }
+            this.$store.dispatch("XADDMY",obj);
+            console.log(startnum,endnum);
+        },
+        childaddstr(data){
+            console.log(data);
+            this.startenddata.push(data);
         }
     }
 }
@@ -459,5 +611,252 @@ export default {
     border: 15px;
     background-color: #FDFDFD;
     border:15px solid #EEEEEE;
+    position: relative;
+    .router_box{
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-color: #FDFDFD;
+    }
+}
+.newschedule_box{
+    position: absolute;
+    left:-100px;
+    top:-100px;
+    width:2000px;
+    height:1200px;
+    background-color: rgba(178,178,178,.6);
+    .newschedule{
+        position: absolute;
+        left:35%;
+        top:200px;
+        width: 660px;
+        height: 483px;
+        background-color: #fff;
+        border-radius:10px;
+        box-shadow:0 0 5px 5px rgb(178,178,178);
+        h3{
+            width: 100%;
+            height:50px;
+            padding:0 30px;
+            line-height:50px;
+            font-weight:400;
+            border-bottom:1px solid #ccc;
+            span{
+                float:right;
+                width:15px;
+                height: 15px;
+                margin: 0 50px 0 0;
+            }
+        }
+        .new_out_in{
+            display: block;
+            width: 580px;
+            padding-left:20px;
+            height: 38px;
+            margin:20px auto;
+            line-height: 1.5;
+            color: #333;
+            background-color: #fff;
+            background-clip: padding-box;
+            border-radius: .25rem;
+        }
+        input{
+            border: 1px solid #eee;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        input:hover{
+            border-color:#22D7BB;
+        }
+        p{
+            span:first-child{
+                display:inline-block;
+                width:120px;
+                text-align:right;
+                height:38px;
+                margin:5px 0;
+            }
+        }
+        p:nth-child(3){
+            input{
+                width:475px;
+                height: 38px;
+                padding-left:20px;
+            }
+        }
+        p:nth-child(4){
+            position: relative;
+            button{
+                display: inline-block;
+                width: 180px;
+                height: 38px;
+                line-height: 38px;
+                color: #333;
+                background-clip: padding-box;
+                border: 1px solid #eee;
+                background-color: #fff;
+                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            }
+            button:hover{
+                border-color:#22D7BB;
+            }
+            span:nth-child(3){
+                width:100px;
+                display:inline-block;
+                text-align:right;
+            }
+            span:last-child{
+                display:inline-block;
+                margin-left: 125px;
+                margin-top: 10px;
+                margin-right: 15px;
+                vertical-align:bottom;
+                width: 15px;
+                height:15px;
+                border:1px solid #ccc;
+                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            }
+            span:last-child:hover{
+                border-color:#22D7BB;
+            }
+        }
+        p:nth-child(5){
+            line-height:48px;
+            i{
+                display:inline-block;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 12px;
+                border-radius: 30px;
+                background-color: rgb(239, 126, 222);
+                vertical-align:middle;
+                text-align:center;
+                color:#fff;
+                margin: 0 5px;
+                font-style:normal;
+            }
+            b{
+                display:inline-block;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 12px;
+                border-radius: 30px;
+                border:1px dashed #ccc;
+                vertical-align:middle;
+                text-align:center;
+                color:#ccc;
+                margin: 0 5px;
+                font-size:20px;
+                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            }
+            b:hover{
+                border-color:#22D7BB;
+                color:#22D7BB;
+            }
+        }
+        p:nth-child(8){
+            button{
+                width: 106px;
+                height: 38px;
+                color: #fff;
+                background-color: #22d7bb;
+                border-color: #22d7bb;
+                border-radius:20px;
+                border:none;
+                outline:none;
+            }
+            button:hover{
+                box-shadow:0 0 5px 2px #22d7bb;
+            }
+            button:last-child{
+                color:#ccc;
+                background-color: #fff;
+                margin-left: 10px;
+            }
+            button:last-child:hover{
+                box-shadow:0 0 0 0 #fff;
+                color:#22d7bb;
+            }
+        }
+    }
+    .opennewschedule{
+        height:800px;
+    }
+    .open_newschedule{
+        p:nth-child(1){
+            line-height:48px;
+        }
+        p:nth-child(2){
+            input{
+                width:475px;
+                height: 38px;
+                padding-left:20px;
+                margin-left: 10px;;
+            }
+        }
+        p:nth-child(3){
+            a{
+                display:inline-block;
+                width:445px;
+                height: 38px;
+                padding-left:20px;
+                border:1px solid #ccc;
+                margin-left: 10px;;
+                line-height:38px;
+                text-decoration:none;
+                color:#666;
+            }
+            a:hover{
+                border-color:#22d7bb;
+                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            }
+        }
+        p:nth-child(4){
+            a{
+                display:inline-block;
+                margin-left: 20px;
+                color:#22d7bb;
+                text-decoration:none;
+            }
+        }
+        p:nth-child(5){
+            input{
+                width:475px;
+                height: 38px;
+                padding-left:20px;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+.fontweekday{
+    color:#333;
+    text-decoration:none;
+}
+.fade-enter-active, .fade-leave-active {
+    transition: all .5s ease 0s;
+}
+.fade-enter, .fade-leave-active {
+    opacity: 0
+}
+.posasmall{
+    position: absolute;
+    left:100px;
+    top:222px;
+    width:230px;
+    height:300px;
+    background-color: #fff;
+}
+.rightposasmall{
+    position: absolute;
+    right:100px;
+    top:222px;
+    width:230px;
+    height:300px;
+    background-color: #fff;
 }
 </style>

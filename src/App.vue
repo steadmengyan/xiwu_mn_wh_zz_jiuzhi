@@ -16,6 +16,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: 'app',
@@ -36,7 +37,7 @@ export default {
           title:"云盘"
         },{
           url:'/address/',
-          title:"通讯录"
+          title:"通讯录"  
         }
       ]
     }
@@ -51,9 +52,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
   .box{
-    width: 1903px;
-    height:985px;
+    width:2000px;
+    height:100%;
     position: relative;
   }
   nav{
