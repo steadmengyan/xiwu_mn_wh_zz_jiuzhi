@@ -614,7 +614,7 @@ const store = new Vuex.Store({
     },
     async YJHADD({ commit }, payload) {
       //上传数据
-      var data = await fetch('/mYthings/', {
+      var data = await fetch('/YmYthings/', {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -625,7 +625,7 @@ const store = new Vuex.Store({
     },
     async YJHDEL({ commit }, payload) {
       //发送delete请求到json-server服务器,自动帮我删除这条数据,操作 data.json文件
-      var data = await fetch('/mYthings/' + payload.id, {
+      var data = await fetch('/YmYthings/' + payload.id, {
           "method": "DELETE"
       }).then(res => res.json());
       commit("YJHDEL", payload);
@@ -657,7 +657,7 @@ const store = new Vuex.Store({
     },
     async GETALL(context, payload) {
       //请求数据
-      var data = await fetch('/mYthings/').then(res => res.json());
+      var data = await fetch('/YmYthings/').then(res => res.json());
       console.log(data);
       context.commit('GETALL', data);
     },
