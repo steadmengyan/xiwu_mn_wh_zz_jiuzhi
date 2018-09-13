@@ -81,5 +81,53 @@
     "color": "red",
     "id": "7ci6lkzx",
     "title": ""
-  }
+  },
+  
+
+
+
+
+
+  "mYthings": [
+    {
+        "i":"imgs/1.png",
+        "xiangmu":"事物处理",
+        "beizhu":"适用于最简单的事务管理",
+        "leixing":"通用",
+        "zhuangtai":"已启用",
+        "qiyong":true
+    },
+    {
+        "i":"imgs/2.png",
+        "xiangmu":"项目管理",
+        "beizhu":"适用于通用的项目管理",
+        "leixing":"通用",
+        "zhuangtai":"已启用",
+        "qiyong":true
+    },
+    {
+        "i":"imgs/3.png",
+        "xiangmu":"敏捷开发",
+        "beizhu":"适用于敏捷研发管理，包括迭代、需求和缺陷",
+        "leixing":"软件",
+        "zhuangtai":"已启用",
+        "qiyong":true
+    },
+    {
+        "i":"imgs/4.png",
+        "xiangmu":"缺陷管理",
+        "beizhu":"适用于缺陷管理",
+        "leixing":"软件",
+        "zhuangtai":"已启用",
+        "qiyong":true
+    },
+    {
+        "i":"imgs/5.png",
+        "xiangmu":"测试管理",
+        "beizhu":"适用于测试用例管理",
+        "leixing":"软件",
+        "zhuangtai":"已启用",
+        "qiyong":true
+    }
+  ]
 }

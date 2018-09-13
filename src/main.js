@@ -464,9 +464,18 @@ const store = new Vuex.Store({
     XADDMY(state,payload){
       state.mythings.push(payload);
       console.log(state.mythings,payload);
+    },
+    GETALL(state, payload) {
+      state.todos = payload;
     }
   },
   actions:{
+    async GETALL(context, payload) {
+      //请求数据
+      var data = await fetch('/mYthings/').then(res => res.json());
+      console.log(data);
+      context.commit('GETALL', data);
+    },
     async ADD({commit},payload){
       var data = await fetch("../data/json.json").then(res => res.json());
       console.log(payload);
