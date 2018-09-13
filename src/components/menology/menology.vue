@@ -40,19 +40,19 @@
                 </div>
             </div>
             <div class="myday">
-                <p @click="mythingsshowfun"><i></i>我的日程<b></b></p>
+                <p @click="mythingsshowfun"><i class="iconfont icon-shu"></i>我的日程<b class="iconfont icon-wifi"></b></p>
                 <transition name="fade">
                     <ul v-show="mythingsshow" transiton="fade">
                         <li v-for="item of mythings" @click="adddaythings(item)" ><i></i>{{item.title}}<b></b></li>
                     </ul>
                 </transition>
-                <p @click="teamthingsshowfun"><i></i>团队日程<b></b></p>
+                <p @click="teamthingsshowfun"><i class="iconfont icon-xiaotuziCduan_"></i>团队日程<b class="iconfont icon-diandiandian"></b></p>
                 <transition name="fade">
                     <ul v-show="teamthingsshow" transiton="fade">
                         <li v-for="item of teamthings" @click="adddaythings(item)"><i></i>{{item.title}}<b></b></li>
                     </ul>
                 </transition>
-                <p @click="peoplethingsshowfun"><i></i>成员日程<b></b></p>
+                <p @click="peoplethingsshowfun"><i class="iconfont icon-xiaotuziCduan_"></i>成员日程<b class="iconfont icon-iconjia"></b></p>
                 <transition name="fade">
                     <ul v-show="peoplethingsshow" transiton="fade">
                         <li v-for="item of peoplethings" @click="adddaythings(item)"><i></i>{{item.title}}<b></b></li>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="moon_content">
-                <sunday :theyear="theyear" :themonth="themonth" :downda="downda"></sunday>
+                <sunday :theyear="theyear" :themonth="themonth" :downda="downda"  v-on:sunchildaddstr="sunchildaddstr"></sunday>
                 <div class="router_box" v-show="changemonthweekday" >
                     <router-view></router-view>
                 </div>
@@ -92,13 +92,16 @@
                 <input class="new_out_in" type="text" placeholder="日程安排,如下午02:00例会" v-model="addstr">
                 <p>
                     <span>日历</span>
-                    <input type="text" value="会议安排">
+                    <!-- <input type="text" value="会议安排"> -->
+                    <select> 
+                        <option v-for="item of teamthings" value ="item.title">{{item.title}}</option>
+                    </select>
                 </p>
                 <p>
                     <span>开始日期</span>
-                    <button>2018-09-12 08:10</button>
+                    <button @click="leftsmallshow = !leftsmallshow">2018-09-12 08:10</button>
                     <span>结束日期</span>
-                    <button>2018-09-12 08:40</button><br>
+                    <button @click="rightsmallshow = !rightsmallshow">2018-09-12 08:40</button><br>
                     <span></span>全天
                 </p>
                 <p>
@@ -116,18 +119,21 @@
                     <p><span>地点</span><input type="text"></p>
                     <p><span>重复</span><a href="#">从不重复</a></p>
                     <p><span>提醒</span><a >+添加新提醒</a></p>
-                    <p><span>描述</span><input type="text"></p>
+                    <p><span>描述</span>
+                        <input type="text" v-show="inputatextareashow" @click="inputatextareashow = false">
+                        <textarea name="" v-show="!inputatextareashow" id="" cols="60" rows="10" @blur="inputatextareashow = true"></textarea>
+                    </p>
                     <p><span></span>仅参考者可见</p>
                 </div>
                 <p>
-                    <!-- <span></span> -->
+                    <span></span>
                     <button @click="postadddata">确定</button>
                     <button>取消</button>
                 </p>
-                <div class="posasmall">
+                <div class="posasmall" v-show="leftsmallshow">
                     <mysmall v-on:childaddstr="childaddstr"></mysmall>
                 </div>
-                <div class="rightposasmall">
+                <div class="rightposasmall" v-show="rightsmallshow">
                     <mysmall v-on:childaddstr="childaddstr"></mysmall>
                 </div>
             </div>
@@ -159,7 +165,11 @@ export default {
             teamthings:[],
             peoplethings:[],
             startenddata:[],
-            downda:"my", 
+            leftsmallshow:false,
+            rightsmallshow:false,
+            inputatextareashow:true,
+            // updataboxshow:false,
+            downda:"", 
             thingslist:[
                 {
                     url:'/menology/week/',
@@ -177,7 +187,7 @@ export default {
     beforeCreate(){
         this.$store.dispatch("XGETALL");
     },
-    updated() {
+    updated(){
         // 发送默认 GETALL
         // console.log(this.$store.state.mythings,this.$store.state.teamthings,this.$store.state.peoplethings)   
         this.mythings = this.$store.state.mythings;
@@ -366,6 +376,7 @@ export default {
             console.log(event);
         },
         postadddata(){
+            this.newscheduleboxshow = !this.newscheduleboxshow;
             var startnum;
             var endnum;
             var a = parseInt(this.startenddata[this.startenddata.length-1]);
@@ -395,6 +406,10 @@ export default {
         childaddstr(data){
             console.log(data);
             this.startenddata.push(data);
+        },
+        sunchildaddstr(data){
+            this.newscheduleboxshow = data;
+            console.log(data)
         }
     }
 }
@@ -425,6 +440,14 @@ export default {
         color: #333;
         line-height: 50px;
         font-size: 16px;
+        width:calc(100% - 40px);
+        i{
+            float:right;
+            color:#ddd;
+        }
+        i:hover{
+            color:#22D7BB;
+        }
     }
     a{
         float:right;
@@ -526,6 +549,12 @@ export default {
         width: 14px;
         height: 15px;
         margin: 5px 10px 0 10px;
+    }
+    b{
+        float:right;
+        width: 14px;
+        height: 15px;
+        margin: 0 10px 0 10px;
     }
 }
 .m_header{
@@ -680,7 +709,7 @@ export default {
             }
         }
         p:nth-child(3){
-            input{
+            select{
                 width:475px;
                 height: 38px;
                 padding-left:20px;
