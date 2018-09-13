@@ -153,6 +153,12 @@ a {
   color: #22d7bb;
   border-right: 4px solid #22d7bb;
 }
+li.active {
+  background: #e7f9f6;
+  color: #22d7bb;
+  border-right: 4px solid #22d7bb;
+}
+
 .cuo {
   display: block;
   font-size: 12px;
@@ -162,7 +168,13 @@ a {
   color: #aaa;
 }
 .lc {
-  border: 1px solid blue;
+  background: #fdfdfd;
+  border: 1px solid #22d7bb;
+}
+.chat_list li:hover {
+  box-shadow: 0 0 8px 2px #eee;
+  background: 0 0;
+  text-decoration: none;
 }
 </style>
 
@@ -208,7 +220,8 @@ a {
             <input type="text" class="search_inp" placeholder="搜索成员、消息" @focus="inphuo()" @blur="inpshi()" :class="{lc : lc}">
           </div>
           <ul class="chat_list">
-            <li v-for="(item,index) of mesList" @click="routerGo(item.url)" :class="{cur:item.title==$route.name}">
+            <li v-for="(item,index) of mesList" @click="routerGo(item.url)" :class="{active : $route.name.indexOf(item.title) != -1}"
+>
               <a href="javascript:;">
                 <img :src="item.icon">
                 <span>{{item.title}}</span>

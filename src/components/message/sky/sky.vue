@@ -101,7 +101,7 @@ div {
   color: #22d7bb;
 }
 .center-content {
-  height: 500px;
+  height: 860px;
   position: absolute;
   top: 86px;
   left: 0;
@@ -133,7 +133,7 @@ div {
         </div>
         <div >
           <ul class="reads" >
-            <li v-for="(item,index) of readList" @click="routerGo(item.url)" :class="{cur:item.title==$route.name}">
+            <li v-for="(item,index) of readList" @click="routerGo(item.url)" :class="{cur : $route.name.indexOf(item.title) != -1}">
               <a href="javascript:;">{{item.title}}</a>
             </li>
           </ul>

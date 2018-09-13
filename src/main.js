@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
+
+import "babel-polyfill";
 Vue.use(Vuex)
 Vue.use(VueRouter)// 安装路由
 // 使用路由管理子组件
@@ -14,222 +16,222 @@ const Menology = require('./components/menology/menology.vue')// 日历
 // 路由配置
 const r = [
   {
-    path:'/project',
-    component:Project.default,
-    name:"项目",
-    children:[
+    path: '/project',
+    component: Project.default,
+    name: "项目",
+    children: [
       {
-        path:'/project/peizhi',
-        name:'配置中心',
-        component:require('./components/project/peizhi/peizhi.vue').default,
-        children:[
+        path: '/project/peizhi',
+        name: '配置中心',
+        component: require('./components/project/peizhi/peizhi.vue').default,
+        children: [
           {
-            path:'/project/peizhi/xiangmu',
-            name:'项目',
-            component:require('./components/project/peizhi/xiangmu/xiangmu.vue').default,
-            children:[
+            path: '/project/peizhi/xiangmu',
+            name: '项目',
+            component: require('./components/project/peizhi/xiangmu/xiangmu.vue').default,
+            children: [
               {
-                path:'/project/peizhi/xiangmu/xiangmu',
-                name:'项目模板',
-                component:require('./components/project/peizhi/xiangmu/xiangmu/xiangmu.vue').default,
+                path: '/project/peizhi/xiangmu/xiangmu',
+                name: '项目模板',
+                component: require('./components/project/peizhi/xiangmu/xiangmu/xiangmu.vue').default,
               },
               {
-                path:'/project/peizhi/xiangmu/zujian',
-                name:'组件管理',
-                component:require('./components/project/peizhi/xiangmu/zujian/zujian.vue').default,
+                path: '/project/peizhi/xiangmu/zujian',
+                name: '组件管理',
+                component: require('./components/project/peizhi/xiangmu/zujian/zujian.vue').default,
               },
               {
-                path:'/project/peizhi/xiangmu/baobiao',
-                name:'报表管理',
-                component:require('./components/project/peizhi/xiangmu/baobiao/baobiao.vue').default,
+                path: '/project/peizhi/xiangmu/baobiao',
+                name: '报表管理',
+                component: require('./components/project/peizhi/xiangmu/baobiao/baobiao.vue').default,
               }
             ]
           },
           {
-            path:'/project/peizhi/renwu',
-            name:'任务',
-            component:require('./components/project/peizhi/renwu/renwu.vue').default,
-            children:[
+            path: '/project/peizhi/renwu',
+            name: '任务',
+            component: require('./components/project/peizhi/renwu/renwu.vue').default,
+            children: [
               {
-                path:'/project/peizhi/renwu/renwu',
-                name:'任务类型',
-                component:require('./components/project/peizhi/renwu/renwu/renwu.vue').default,
+                path: '/project/peizhi/renwu/renwu',
+                name: '任务类型',
+                component: require('./components/project/peizhi/renwu/renwu/renwu.vue').default,
               },
               {
-                path:'/project/peizhi/renwu/shuxing',
-                name:'属性管理',
-                component:require('./components/project/peizhi/renwu/shuxing/shuxing.vue').default,
+                path: '/project/peizhi/renwu/shuxing',
+                name: '属性管理',
+                component: require('./components/project/peizhi/renwu/shuxing/shuxing.vue').default,
               },
               {
-                path:'/project/peizhi/renwu/zhuangtai',
-                name:'状态管理',
-                component:require('./components/project/peizhi/renwu/zhuangtai/zhuangtai.vue').default,
+                path: '/project/peizhi/renwu/zhuangtai',
+                name: '状态管理',
+                component: require('./components/project/peizhi/renwu/zhuangtai/zhuangtai.vue').default,
               },
               {
-                path:'/project/peizhi/renwu/shuju',
-                name:'数据管理',
-                component:require('./components/project/peizhi/renwu/shuju/shuju.vue').default,
+                path: '/project/peizhi/renwu/shuju',
+                name: '数据管理',
+                component: require('./components/project/peizhi/renwu/shuju/shuju.vue').default,
               },
               {
-                path:'/project/peizhi/renwu/biaoqian',
-                name:'标签管理',
-                component:require('./components/project/peizhi/renwu/biaoqian/biaoqian.vue').default,
+                path: '/project/peizhi/renwu/biaoqian',
+                name: '标签管理',
+                component: require('./components/project/peizhi/renwu/biaoqian/biaoqian.vue').default,
               },
               {
-                path:'/project/peizhi/renwu/youxianji',
-                name:'优先级管理',
-                component:require('./components/project/peizhi/renwu/youxianji/youxianji.vue').default,
+                path: '/project/peizhi/renwu/youxianji',
+                name: '优先级管理',
+                component: require('./components/project/peizhi/renwu/youxianji/youxianji.vue').default,
               }
             ]
           },
           {
-            path:'/project/peizhi/anquan',
-            name:'安全',
-            component:require('./components/project/peizhi/anquan/anquan.vue').default,
-            children:[
+            path: '/project/peizhi/anquan',
+            name: '安全',
+            component: require('./components/project/peizhi/anquan/anquan.vue').default,
+            children: [
               {
-                path:'/project/peizhi/anquan/juese',
-                name:'角色管理',
-                component:require('./components/project/peizhi/anquan/juese/juese.vue').default,
+                path: '/project/peizhi/anquan/juese',
+                name: '角色管理',
+                component: require('./components/project/peizhi/anquan/juese/juese.vue').default,
               },
               {
-                path:'/project/peizhi/anquan/anquan',
-                name:'安全管理',
-                component:require('./components/project/peizhi/anquan/anquan/anquan.vue').default,
+                path: '/project/peizhi/anquan/anquan',
+                name: '安全管理',
+                component: require('./components/project/peizhi/anquan/anquan/anquan.vue').default,
               },
               {
-                path:'/project/peizhi/anquan/quanxian',
-                name:'权限管理',
-                component:require('./components/project/peizhi/anquan/quanxian/quanxian.vue').default,
-              },
-            ]
-          },
-          {
-            path:'/project/peizhi/gaoji',
-            name:'高级',
-            component:require('./components/project/peizhi/gaoji/gaoji.vue').default,
-            children:[
-              {
-                path:'/project/peizhi/gaoji/tixing',
-                name:'提醒管理',
-                component:require('./components/project/peizhi/gaoji/tixing/tixing.vue').default,
-              },
-              {
-                path:'/project/peizhi/gaoji/tongzhi',
-                name:'通知管理',
-                component:require('./components/project/peizhi/gaoji/tongzhi/tongzhi.vue').default,
-              },
-              {
-                path:'/project/peizhi/gaoji/shijian',
-                name:'事件管理',
-                component:require('./components/project/peizhi/gaoji/shijian/shijian.vue').default,
+                path: '/project/peizhi/anquan/quanxian',
+                name: '权限管理',
+                component: require('./components/project/peizhi/anquan/quanxian/quanxian.vue').default,
               },
             ]
           },
           {
-            path:'/project/peizhi/quanju',
-            name:'全局',
-            component:require('./components/project/peizhi/quanju/quanju.vue').default,
-            children:[
+            path: '/project/peizhi/gaoji',
+            name: '高级',
+            component: require('./components/project/peizhi/gaoji/gaoji.vue').default,
+            children: [
               {
-                path:'/project/peizhi/quanju/gongzuo',
-                name:'全局',
-                component:require('./components/project/peizhi/quanju/gongzuo/gongzuo.vue').default,
+                path: '/project/peizhi/gaoji/tixing',
+                name: '提醒管理',
+                component: require('./components/project/peizhi/gaoji/tixing/tixing.vue').default,
+              },
+              {
+                path: '/project/peizhi/gaoji/tongzhi',
+                name: '通知管理',
+                component: require('./components/project/peizhi/gaoji/tongzhi/tongzhi.vue').default,
+              },
+              {
+                path: '/project/peizhi/gaoji/shijian',
+                name: '事件管理',
+                component: require('./components/project/peizhi/gaoji/shijian/shijian.vue').default,
+              },
+            ]
+          },
+          {
+            path: '/project/peizhi/quanju',
+            name: '全局',
+            component: require('./components/project/peizhi/quanju/quanju.vue').default,
+            children: [
+              {
+                path: '/project/peizhi/quanju/gongzuo',
+                name: '全局',
+                component: require('./components/project/peizhi/quanju/gongzuo/gongzuo.vue').default,
               }
             ]
           }
         ]
       },
       {
-        path:'/project/huishou',
-        name:'回收站',
-        component:require('./components/project/huishou/huishou.vue').default,
+        path: '/project/huishou',
+        name: '回收站',
+        component: require('./components/project/huishou/huishou.vue').default,
       },
       {
-        path:'/project/xiazai',
-        name:'下载任务',
-        component:require('./components/project/xiazai/xiazai.vue').default,
+        path: '/project/xiazai',
+        name: '下载任务',
+        component: require('./components/project/xiazai/xiazai.vue').default,
       },
       {
-        path:'/project/wode',
-        name:'我的任务',
-        component:require('./components/project/wode/wode.vue').default,
-        children:[
+        path: '/project/wode',
+        name: '我的任务',
+        component: require('./components/project/wode/wode.vue').default,
+        children: [
           {
-            path:'/project/wode/fuze/',
-            name:'我负责的',
-            component:require('./components/project/wode/fuze/fuze.vue').default,
-            children:[
+            path: '/project/wode/fuze/',
+            name: '我负责的',
+            component: require('./components/project/wode/fuze/fuze.vue').default,
+            children: [
               {
-                path:'/project/wode/fuze/huodong',
-                name:'活动任务',
-                component:require('./components/project/wode/fuze/huodong/huodong.vue').default,
+                path: '/project/wode/fuze/huodong',
+                name: '活动任务',
+                component: require('./components/project/wode/fuze/huodong/huodong.vue').default,
               },
               {
-                path:'/project/wode/fuze/wancheng',
-                name:'完成任务',
-                component:require('./components/project/wode/fuze/wancheng/wancheng.vue').default,
+                path: '/project/wode/fuze/wancheng',
+                name: '完成任务',
+                component: require('./components/project/wode/fuze/wancheng/wancheng.vue').default,
               },
             ]
           },
           {
-            path:'/project/wode/canyu/',
-            name:'我参与的',
-            component:require('./components/project/wode/canyu/canyu.vue').default,
-            children:[
+            path: '/project/wode/canyu/',
+            name: '我参与的',
+            component: require('./components/project/wode/canyu/canyu.vue').default,
+            children: [
               {
-                path:'/project/wode/canyu/huodong',
-                name:'活动任务',
-                component:require('./components/project/wode/canyu/huodong/huodong.vue').default,
+                path: '/project/wode/canyu/huodong',
+                name: '活动任务',
+                component: require('./components/project/wode/canyu/huodong/huodong.vue').default,
               },
               {
-                path:'/project/wode/canyu/wancheng',
-                name:'完成任务',
-                component:require('./components/project/wode/canyu/wancheng/wancheng.vue').default,
-              },
-            ]
-          },
-          {
-            path:'/project/wode/chuangjian/',
-            name:'我创建的',
-            component:require('./components/project/wode/chuangjian/chuangjian.vue').default,
-            children:[
-              {
-                path:'/project/wode/chuangjian/huodong',
-                name:'活动任务',
-                component:require('./components/project/wode/chuangjian/huodong/huodong.vue').default,
-              },
-              {
-                path:'/project/wode/chuangjian/wancheng',
-                name:'完成任务',
-                component:require('./components/project/wode/chuangjian/wancheng/wancheng.vue').default,
+                path: '/project/wode/canyu/wancheng',
+                name: '完成任务',
+                component: require('./components/project/wode/canyu/wancheng/wancheng.vue').default,
               },
             ]
           },
           {
-            path:'/project/wode/fenpei/',
-            name:'我分配的',
-            component:require('./components/project/wode/fenpei/fenpei.vue').default,
-            children:[
+            path: '/project/wode/chuangjian/',
+            name: '我创建的',
+            component: require('./components/project/wode/chuangjian/chuangjian.vue').default,
+            children: [
               {
-                path:'/project/wode/fenpei/huodong',
-                name:'活动任务',
-                component:require('./components/project/wode/fenpei/huodong/huodong.vue').default,
+                path: '/project/wode/chuangjian/huodong',
+                name: '活动任务',
+                component: require('./components/project/wode/chuangjian/huodong/huodong.vue').default,
               },
               {
-                path:'/project/wode/fenpei/wancheng',
-                name:'完成任务',
-                component:require('./components/project/wode/fenpei/wancheng/wancheng.vue').default,
+                path: '/project/wode/chuangjian/wancheng',
+                name: '完成任务',
+                component: require('./components/project/wode/chuangjian/wancheng/wancheng.vue').default,
+              },
+            ]
+          },
+          {
+            path: '/project/wode/fenpei/',
+            name: '我分配的',
+            component: require('./components/project/wode/fenpei/fenpei.vue').default,
+            children: [
+              {
+                path: '/project/wode/fenpei/huodong',
+                name: '活动任务',
+                component: require('./components/project/wode/fenpei/huodong/huodong.vue').default,
+              },
+              {
+                path: '/project/wode/fenpei/wancheng',
+                name: '完成任务',
+                component: require('./components/project/wode/fenpei/wancheng/wancheng.vue').default,
               },
             ]
           },
         ]
       }
     ]
-  },{
-    path:'/message',
-    component:Message.default,
-    name:"消息",
+  }, {
+    path: '/message',
+    component: Message.default,
+    name: "消息",
     children: [
       //配置二级子路由
       {
@@ -294,55 +296,55 @@ const r = [
         name: '日程助手'
       }
     ]
-  },{
-    path:'/network',
-    component:Network.default,
-    name:"云盘",
-     children:[
+  }, {
+    path: '/network',
+    component: Network.default,
+    name: "云盘",
+    children: [
       {
-          path: 'qiye',
-          component: require('./components/network/qiye/qiye.vue').default,
-          name: '企业网盘',
-          children:[
-            {
-              path: 'guanli',
-              component: require('./components/network/qiye/guanli/guanli.vue').default,
-              name: '缺陷管理'  
-            },
-            {
-              path: 'gongxiang',
-              component: require('./components/network/qiye/gongxiang/gongxiang.vue').default,
-              name: '资源共享' 
-            },
-            {
-              path: 'zhidu',
-              component: require('./components/network/qiye/zhidu/zhidu.vue').default,
-              name: '公司制度'  
-           }
-          ]
-          
+        path: 'qiye',
+        component: require('./components/network/qiye/qiye.vue').default,
+        name: '企业网盘',
+        children: [
+          {
+            path: 'guanli',
+            component: require('./components/network/qiye/guanli/guanli.vue').default,
+            name: '缺陷管理'
+          },
+          {
+            path: 'gongxiang',
+            component: require('./components/network/qiye/gongxiang/gongxiang.vue').default,
+            name: '资源共享'
+          },
+          {
+            path: 'zhidu',
+            component: require('./components/network/qiye/zhidu/zhidu.vue').default,
+            name: '公司制度'
+          }
+        ]
+
       },
       {
-          path: 'geren',
-          component: require('./components/network/geren/geren.vue').default,
-          name: '个人网盘'
+        path: 'geren',
+        component: require('./components/network/geren/geren.vue').default,
+        name: '个人网盘'
       },
       {
-          path: 'yuwo',
-          component: require('./components/network/yuwo/yuwo.vue').default,
-          name: '与我共享'
+        path: 'yuwo',
+        component: require('./components/network/yuwo/yuwo.vue').default,
+        name: '与我共享'
       },
       {
-          path: 'del',
-          component: require('./components/network/del/del.vue').default,
-          name: '回收站'
+        path: 'del',
+        component: require('./components/network/del/del.vue').default,
+        name: '回收站'
       }
-     ]
-  },{
-    path:'/address',
-    component:Address.default,
-    name:"通讯录",
-    children:[
+    ]
+  }, {
+    path: '/address',
+    component: Address.default,
+    name: "通讯录",
+    children: [
       {
         path: '/address/a_jl',
         component: require('./components/address/a_jl/a_jl.vue').default,
@@ -382,33 +384,33 @@ const r = [
         name: '小特机器人'
       }
     ]
-  },{
-    path:'/menology',
-    component:Menology.default,
-    name:"日历",
-    children:[
+  }, {
+    path: '/menology',
+    component: Menology.default,
+    name: "日历",
+    children: [
       {
-        path:'/menology/week',
-        component:require('./components/menology/week/week.vue').default,
-        name:"周",
-      },{
-        path:'/menology/day',
-        component:require('./components/menology/day/day.vue').default,
-        name:"日",
+        path: '/menology/week',
+        component: require('./components/menology/week/week.vue').default,
+        name: "周",
+      }, {
+        path: '/menology/day',
+        component: require('./components/menology/day/day.vue').default,
+        name: "日",
       }
     ]
-  },{
+  }, {
     // 如果随便输入地址,转到首页
-    path:'*',
-    redirect:'/project'
+    path: '*',
+    redirect: '/project'
   }
 ]
 // 路由初始化
 const router = new VueRouter({
-  routes:r
+  routes: r
 })
 // 设置全局守卫
-router.beforeEach((to,from,next) => {
+router.beforeEach((to, from, next) => {
   // console.log(from);
   // console.log(to);
   document.title = to.name;
@@ -416,109 +418,148 @@ router.beforeEach((to,from,next) => {
 })
 // 配置vue
 const store = new Vuex.Store({
-  state:{
-    count:1,
-    allthings:[],
-    mythings:[],
-    teamthings:[],
-    peoplethings:[],
-    actionthings:[]
+  state: {
+    count: 1,
+    allthings: [],
+    mythings: [],
+    teamthings: [],
+    peoplethings: [],
+    actionthings: [],
+    todos: [],
+    rytodos: []
   },
-  mutations:{
-    ADD(state,payload){
-      console.log(state,payload)
+  mutations: {
+    ryGETALL(state, payload) {
+      state.rytodos = payload;
     },
-    XGETALL(state,payload){
+    ryDEL(state, payload) {
+      state.rytodos = state.rytodos.filter(item => {
+        return item.id != payload.id;
+      })
+    },
+
+    ryADD(state, payload) {
+      state.rytodos.push(payload);
+    },
+    ADD(state, payload) {
+      console.log(state, payload)
+    },
+    XGETALL(state, payload) {
       state.mythings = payload[0];
       state.teamthings = payload[1];
       state.peoplethings = payload[2];
       var arrlist = [];
-      for(var i=0;i<payload[0].length;i++){
+      for (var i = 0; i < payload[0].length; i++) {
         arrlist.push(payload[0][i]);
       }
-      for(var a=0;a<payload[1].length;a++){
+      for (var a = 0; a < payload[1].length; a++) {
         arrlist.push(payload[1][a]);
       }
-      for(var b=0;b<payload[2].length;b++){
+      for (var b = 0; b < payload[2].length; b++) {
         arrlist.push(payload[2][b]);
       }
       state.allthings = arrlist;
-      console.log(state.mythings,state.peoplethings,state.teamthings);
+      console.log(state.mythings, state.peoplethings, state.teamthings);
     },
-    XGETMY(state,payload){
+    XGETMY(state, payload) {
       state.mythings = payload;
       console.log(state.mythings);
     },
-    XGETTEAM(state,payload){
+    XGETTEAM(state, payload) {
       state.teamthings = payload;
       console.log(state.teamthings);
     },
-    XGETPEOPLE(state,payload){
+    XGETPEOPLE(state, payload) {
       state.peoplethings = payload;
       console.log(state.peoplethings);
     },
-    XCHANGE(state,payload){
-      state.actionthings=[];
+    XCHANGE(state, payload) {
+      state.actionthings = [];
       state.actionthings.push(payload);
     },
-    XADDMY(state,payload){
+    XADDMY(state, payload) {
       state.mythings.push(payload);
-      console.log(state.mythings,payload);
+      console.log(state.mythings, payload);
     },
     GETALL(state, payload) {
       state.todos = payload;
     }
   },
-  actions:{
+  actions: {
+    async ryGETALL(context, payload) {
+      //请求数据
+      var data = await fetch('/ryList/').then(res => res.json());
+      console.log(data);
+      context.commit('ryGETALL', data);
+    },
+    async ryDEL({ commit }, payload) {
+      //发送delete请求到json-server服务器,自动帮我删除这条数据,操作 data.json文件
+      var data = await fetch('/ryList/' + payload.id, {
+        "method": "DELETE"
+      }).then(res => res.json());
+      commit("ryDEL", payload);
+    },
+
+    async ryADD({ commit }, payload) {
+      //上传数据
+      var data = await fetch('/ryList/', {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": JSON.stringify(payload)
+      }).then(res => res.json());
+      commit("ryADD", data);
+    },
     async GETALL(context, payload) {
       //请求数据
       var data = await fetch('/mYthings/').then(res => res.json());
       console.log(data);
       context.commit('GETALL', data);
     },
-    async ADD({commit},payload){
+    async ADD({ commit }, payload) {
       var data = await fetch("../data/json.json").then(res => res.json());
       console.log(payload);
-      commit("ADD",payload);
+      commit("ADD", payload);
     },
-    async XGETMY({commit},payload){
+    async XGETMY({ commit }, payload) {
       var data = await fetch("/mythings").then(res => res.json());
-			commit("XGETMY",data)
+      commit("XGETMY", data)
     },
-    async XGETTEAM({commit},payload){
+    async XGETTEAM({ commit }, payload) {
       var data = await fetch("/teamthings").then(res => res.json());
-			commit("XGETATEAM",data)
+      commit("XGETATEAM", data)
     },
-    async XGETPEOPLE({commit},payload){
+    async XGETPEOPLE({ commit }, payload) {
       var data = await fetch("/peoplethings").then(res => res.json());
-			commit("XGETAPEOPLE",data)
+      commit("XGETAPEOPLE", data)
     },
-    async XGETALL({commit},payload){
+    async XGETALL({ commit }, payload) {
       var data1 = await fetch("/mythings").then(res => res.json());
       var data2 = await fetch("/teamthings").then(res => res.json());
       var data3 = await fetch("/peoplethings").then(res => res.json());
-      var arrlist = [data1,data2,data3];
-			commit("XGETALL",arrlist);
+      var arrlist = [data1, data2, data3];
+      commit("XGETALL", arrlist);
     },
-    async XCHANGE({commit},payload){
-      var data = await fetch("/actionthings/",{
-				"method" :"POST",
-				"headers":{
-					"Content-Type": "application/json"
-				},
-				body:JSON.stringify(payload)
-			}).then(res => res.json()); 
-			commit("XCHANGE",data);
+    async XCHANGE({ commit }, payload) {
+      var data = await fetch("/actionthings/", {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }).then(res => res.json());
+      commit("XCHANGE", data);
     },
-    async XADDMY({commit},payload){
-      var data = await fetch("/mythings/",{
-				"method" :"POST",
-				"headers":{
-					"Content-Type": "application/json"
-				},
-				body:JSON.stringify(payload)
-			}).then(res => res.json()); 
-			commit("XADDMY",data);
+    async XADDMY({ commit }, payload) {
+      var data = await fetch("/mythings/", {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }).then(res => res.json());
+      commit("XADDMY", data);
     }
   }
 })
@@ -527,7 +568,7 @@ new Vue({
   store,
   router,
   // render: h => h(App)
-  components:{
+  components: {
     App
   }
 })
