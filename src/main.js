@@ -232,7 +232,7 @@ const r = [
     path: '/message',
     component: Message.default,
     name: "消息",
-    children: [
+   	children: [
       //配置二级子路由
       {
         path: '/message/sky',
@@ -243,29 +243,80 @@ const r = [
           {
             path: '/message/sky/unread',
             component: require('./components/message/sky/unread/unread.vue').default,
-            name: '未读',
+            name: '未读网盘助手',
           },
           {
             path: '/message/sky/read',
             component: require('./components/message/sky/read/read.vue').default,
-            name: '已读',
+            name: '已读网盘助手',
           },
           {
             path: '/message/sky/todoread',
             component: require('./components/message/sky/todoread/todoread.vue').default,
-            name: '待处理',
+            name: '待处理网盘助手',
+          },
+          {
+            // 如果随便输入地址,转到首页
+            path: '/message/sky/',
+            redirect: '/message/sky/unread'
           }
         ]
       },
       {
         path: '/message/pro',
         component: require('./components/message/pro/pro.vue').default,
-        name: '项目助手'
+        name: '项目助手',
+        children: [
+          //配置三级子路由
+          {
+            path: '/message/pro/unread',
+            component: require('./components/message/pro/unread/unread.vue').default,
+            name: '未读项目助手',
+          },
+          {
+            path: '/message/pro/read',
+            component: require('./components/message/pro/read/read.vue').default,
+            name: '已读项目助手',
+          },
+          {
+            path: '/message/pro/todoread',
+            component: require('./components/message/pro/todoread/todoread.vue').default,
+            name: '待处理项目助手',
+          },
+          {
+            // 如果随便输入地址,转到首页
+            path: '/message/pro/',
+            redirect: '/message/pro/unread'
+          }
+        ]
       },
       {
         path: '/message/ent',
         component: require('./components/message/ent/ent.vue').default,
-        name: '企业公告'
+        name: '企业公告',
+        children: [
+          //配置三级子路由
+          {
+            path: '/message/ent/unread',
+            component: require('./components/message/ent/unread/unread.vue').default,
+            name: '未读企业公告',
+          },
+          {
+            path: '/message/ent/read',
+            component: require('./components/message/ent/read/read.vue').default,
+            name: '已读企业公告',
+          },
+          {
+            path: '/message/ent/todoread',
+            component: require('./components/message/ent/todoread/todoread.vue').default,
+            name: '待处理企业公告',
+          },
+          {
+            // 如果随便输入地址,转到首页
+            path: '/message/ent/',
+            redirect: '/message/ent/unread'
+          }
+        ]
       },
       {
         path: '/message/ter',
@@ -276,24 +327,57 @@ const r = [
           {
             path: '/message/ter/news',
             component: require('./components/message/ter/news/news.vue').default,
-            name: '消息',
+            name: '信息小特机器人',
           },
           {
             path: '/message/ter/file',
             component: require('./components/message/ter/file/file.vue').default,
-            name: '文件',
+            name: '文件小特机器人',
           },
           {
             path: '/message/ter/fixed',
             component: require('./components/message/ter/fixed/fixed.vue').default,
-            name: '固定消息',
+            name: '固定消息小特机器人',
+          },
+          {
+            // 如果随便输入地址,转到首页
+            path: '/message/ter/',
+            redirect: '/message/ter/news'
           }
         ]
       },
       {
         path: '/message/day',
         component: require('./components/message/day/day.vue').default,
-        name: '日程助手'
+        name: '日程助手',
+        children: [
+          //配置三级子路由
+          {
+            path: '/message/day/unread',
+            component: require('./components/message/day/unread/unread.vue').default,
+            name: '未读日程助手',
+          },
+          {
+            path: '/message/day/read',
+            component: require('./components/message/day/read/read.vue').default,
+            name: '已读日程助手',
+          },
+          {
+            path: '/message/day/todoread',
+            component: require('./components/message/day/todoread/todoread.vue').default,
+            name: '待处理日程助手',
+          },
+          {
+            // 如果随便输入地址,转到首页
+            path: '/message/day/',
+            redirect: '/message/day/unread'
+          }
+        ]
+      },
+      {
+        // 如果随便输入地址,转到首页
+        path: '/message/',
+        redirect: '/message/ter'
       }
     ]
   }, {
