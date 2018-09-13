@@ -17,10 +17,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped> 
     .zong{
         height: 30px;
-        margin-top: 10px;
         margin-bottom: 20px;
 }
     .zong img{
@@ -29,7 +28,6 @@ export default {
   .zong span:nth-child(2){
       position: relative;
       top:-5px;
-    /* margin-left:5px; */
    }
    .zong span:nth-child(3){
       position: relative;
@@ -38,9 +36,12 @@ export default {
    }
     
     .kang{
-        width: 657%;
-        height: 563px;
+        width: 86%;
+        height: 860px;
         border: 15px solid #ccc;
+        position: absolute;
+        left: 13%;
+
     }
     .kang span img{
         margin-top: 25px;

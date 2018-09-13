@@ -71,7 +71,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .iconfont{
         font-size: 22px;
        
@@ -80,28 +80,29 @@ export default {
         color: #ccc;
     }
     .ba{
-        width: 1055px;
-        /* width: 100%; */
-        left: 24%;
+        width:100%; 
+        left: 13%;
+        top:11%;
         height: 800px;
         position: absolute;
         /* background-color: #ccc; */
     }
      .top{
-        width: 1055px;
-        /* width: 100%; */
+        width: 100%;
         height: 200px;
         position: relative;
         background-color:pink;
     }
     .top img{
-        width: 1400px;
-        height: 200px;
+        width: 100%;
+        height: 309px;
+        top:-109px;
+        position:absolute;
     }
     .top p{
         position: relative;
         font-size: 20px;
-        top:-50px;
+        top:83%;
         left:150px;
     }
      .top a{
@@ -111,8 +112,9 @@ export default {
         color:#ccc;
      }
     .fp{
-        width: 1055px;
+        width:100%;
         height: 50px;
+        top:0;
         position: relative;
         background-color:#fff;
     }
@@ -122,7 +124,7 @@ export default {
         /* float: left; */
         position: relative;
         font-size: 15px;
-        top:5px;
+        top:-13px;
         left: 140px;
         color:#333;
         padding-left: 20px;
@@ -130,7 +132,7 @@ export default {
     .fp img{
          position: relative;
         right: -450px;
-        top:15px;
+        top:3px;
         margin-left: -20px;
         margin-right:15px;
     }
@@ -143,7 +145,7 @@ export default {
         position: relative;
         z-index: 999;
         left:20px;
-        top:-90px;
+        top:97px;
     }
     .ddd a{
         font-size: 45px;
@@ -153,40 +155,46 @@ export default {
         padding-left:30px;
     }
      .rw{
-        width: 100%;
+        width: 101%;
         height: 350px;
-        top:15px;
         position: relative;
     }
     .rw .q{
-        width: 750px;
+        width:71%;
         height: 552px;
         border:15px solid #ccc;
         background-color:rgb(253,253,253);
+        position:relative;
         border-right:none;
         float: left;
     }
     .rw .w{
-        width: 245px;
+        width: 13%;
         height: 110px;
         border:15px solid #ccc;
+        background:#fff;
         float: left;
         border-bottom:none;
 
+         position:relative;
+
     }
     .rw .e{
-        width: 245px;
+        width: 13%;
         height: 213px;
         border:15px solid #ccc;
         background-color: rgb(253,253,253);
         float: left;
         border-bottom:none;
+        position:relative;
     }
     .rw .r{
-        width: 245px;
+        width: 13%;
         height: 200px;
         border:15px solid #ccc;
         float: left;
+        position:relative;
+        background:#fff;
     }
     .zuo p:nth-child(1){
         padding-top: 15px;
@@ -228,7 +236,6 @@ export default {
         top:7px;
 }
 .yi{
-    width: 50px;
     height: 30px;
     margin:15px;
     margin-top: 32px;

@@ -24,12 +24,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .da{
-        /* width: 1024px; */
-        width: 100%;
-        left: 24%;
-        height: 601px;
+        width:86%;
+        left:13%;
+        height: 910px;
         border:15px solid #ccc;
         position: absolute;
     }

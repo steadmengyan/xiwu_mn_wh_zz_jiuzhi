@@ -155,13 +155,14 @@ html{
     
 }
 .main{
-    width: 1000px;
+    width: 100%;
     height:100%;
     left: -1px;
+    background:#fff;
 }
 .main-left{
     width: 240px;
-    height:800px;
+    height:950px;
     border-right:1px solid #ccc;
     background-color:rgba(253,253,253,.95);
     float: left;
