@@ -59,6 +59,48 @@
                 </div>
             </div>
         </transition>
+
+        <div class="mask" v-show="isShow2" ></div>
+        <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+            <div class="modal-backdrop" v-show="isShow2">
+                <header class="modal-header">
+                    <a href="javascript:;" class="modal-close ng-scope" @click="xiaoshi"><i class="iconfont icon-guanbi"></i></a>
+                    <h3 class="modal-title ng-binding ng-scope">
+                        修改项目模板
+                    </h3>
+                </header>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ng-binding">模板名称</label>
+                        <input type="text" class="form-control" v-model="mingcheng1">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ng-binding">模板类型</label>
+                        <input type="text" class="form-control"  v-model="leixing1">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ng-binding">备注</label>
+                        <textarea class="form-control"  v-model="beizhu1"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ng-binding">图标</label>
+                        <p style="padding-left:10px;overflow:hidden">
+                            <span v-for="(item,index) in tubiao" :class="{active:index == num}"@click="tab(index)">
+                                <img :src="item">
+                            </span>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <div class="offset-sm-2 col-sm-10 ">
+                            <div class="btn-pair">
+                                <button class="btn btn-primary ng-binding" @click="gaibian">确定</button>
+                                <button class="btn btn-link btn-link-info ng-binding" @click="xiaoshi2">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
        
         <div class="left">
             <i class="iconfont icon-sousuo1"></i>
@@ -95,7 +137,7 @@
                             </span>
                         </td>
                         <td>
-                            <span>修改</span>
+                            <span @click="change(item)">修改</span>
                             <span @click="del(item.id,item.xiangmu)">删除</span>
                         </td>
                     </tr>
@@ -110,6 +152,7 @@ import 'vue2-animate/dist/vue2-animate.min.css';
 export default {
     data(){
         return{
+            isShow2:false,
             isShow1:false,
             isShow:false,
             searchVal:'',
@@ -124,9 +167,14 @@ export default {
             mingcheng:'',
             leixing:'',
             beizhu:'',
+            mingcheng1:'',
+            leixing1:'',
+            beizhu1:'',
             num:0,
             xm:'',
-            ids:''
+            ids:'',
+            ids1:'',
+            i:''
         }
     },
     created() {
@@ -142,6 +190,9 @@ export default {
         },
         xiaoshi1(){
             this.isShow1=false;
+        },
+        xiaoshi2(){
+            this.isShow2=false;
         },
         tab(index) {
             this.num = index;
@@ -177,6 +228,7 @@ export default {
             // this.$store.dispatch("YJHDEL", {
             //     id: id
             // });
+            
             this.ids=id;
             this.xm=xiangmu;
             this.isShow1=!this.isShow1;
@@ -188,6 +240,24 @@ export default {
             this.$store.dispatch("YJHDEL", {
                 id: this.ids
             });
+        },
+        change(item) {
+            this.isShow2=!this.isShow2
+            this.ids1=item.id;
+            this.mingcheng1=item.xiangmu
+            this.beizhu1=item.beizhu
+            this.leixing1=item.leixing,
+            this.i=this.num
+        },
+        gaibian(){
+            this.isShow2=false;
+            this.$store.dispatch("YJHCHANGETITLE", {
+                id:this.ids1,
+                xiangmu:this.mingcheng1,
+                beizhu:this.beizhu1,
+                leixing:this.leixing1,
+                i:this.tubiao[this.i]
+            }); //changetitle
         }
     },
     computed:{

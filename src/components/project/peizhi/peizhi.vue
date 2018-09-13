@@ -17,19 +17,19 @@ export default {
         return {
             tabNav:[
                 {
-                url:'/project/peizhi/xiangmu/xiangmu',
+                url:'/project/peizhi/xiangmu/',
                 title:"项目",
                 },{
-                url:'/project/peizhi/renwu/renwu',
+                url:'/project/peizhi/renwu/',
                 title:"任务"
                 },{
-                url:'/project/peizhi/anquan/juese',
+                url:'/project/peizhi/anquan/',
                 title:"安全"
                 },{
-                url:'/project/peizhi/gaoji/tixing',
+                url:'/project/peizhi/gaoji/',
                 title:"高级"
                 },{
-                url:'/project/peizhi/quanju/gongzuo',
+                url:'/project/peizhi/quanju/',
                 title:"全局"
                 }
             ]

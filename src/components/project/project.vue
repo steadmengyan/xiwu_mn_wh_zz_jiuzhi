@@ -35,7 +35,7 @@ export default {
         return {
             tabNav:[
                 {
-                url:'/project/peizhi/xiangmu/xiangmu',
+                url:'/project/peizhi/',
                 title:"配置中心",
                 leiming:'iconfont icon-shezhi'
                 },{

@@ -522,6 +522,19 @@ const store = new Vuex.Store({
     wangpanfile: []
   },
   mutations: {
+    YJHCHANGETITLE(state, payload){
+      state.todos.filter(item => {
+          // console.log(payload)
+          if(item.id == payload.id){
+              item.xiangmu=payload.xiangmu,
+              item.beizhu=payload.beizhu,
+              item.leixing=payload.leixing
+          }else{
+              return
+          }
+      })
+      // state.todos[payload.id].title=payload.title;
+    },
     YJHGETALL(state, payload) {
       state.YJHtodos = payload;
     },
@@ -620,6 +633,21 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    async YJHCHANGETITLE({commit},payload){
+      // 修改更新数据,data就是更新后的数据
+      var data=await fetch('/YmYthings/'+ payload.id,{
+          "method":'PATCH',
+          "headers":{
+              "Content-Type":"application/json"
+          },
+          "body":JSON.stringify({
+            xiangmu:payload.xiangmu,
+            leixing:payload.leixing,
+            beizhu:payload.beizhu
+          })
+      }).then(res=>res.json())
+      commit("YJHCHANGETITLE",data);
+    },
     async YJHGETALL(context, payload) {
       //请求数据
       var data = await fetch('/Yzujianthings/').then(res => res.json());
