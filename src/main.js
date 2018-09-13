@@ -517,9 +517,21 @@ const store = new Vuex.Store({
     peoplethings: [],
     actionthings: [],
     todos: [],
-    rytodos: []
+    rytodos: [],
+    YJHtodos:[]
   },
   mutations: {
+    YJHGETALL(state, payload) {
+      state.YJHtodos = payload;
+    },
+    YJHADD(state, payload) {
+      state.todos.push(payload);
+    },
+    YJHDEL(state, payload) {
+      state.todos = state.todos.filter(item => {
+          return item.id != payload.id;
+      })
+    },
     ryGETALL(state, payload) {
       state.rytodos = payload;
     },
@@ -594,6 +606,30 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    async YJHGETALL(context, payload) {
+      //请求数据
+      var data = await fetch('/Yzujianthings/').then(res => res.json());
+      // console.log(data);
+      context.commit('YJHGETALL', data);
+    },
+    async YJHADD({ commit }, payload) {
+      //上传数据
+      var data = await fetch('/mYthings/', {
+          "method": "POST",
+          "headers": {
+              "Content-Type": "application/json"
+          },
+          "body": JSON.stringify(payload)
+      }).then(res => res.json());
+      commit("YJHADD", data)
+    },
+    async YJHDEL({ commit }, payload) {
+      //发送delete请求到json-server服务器,自动帮我删除这条数据,操作 data.json文件
+      var data = await fetch('/mYthings/' + payload.id, {
+          "method": "DELETE"
+      }).then(res => res.json());
+      commit("YJHDEL", payload);
+    },
     async ryGETALL(context, payload) {
       //请求数据
       var data = await fetch('/ryList/').then(res => res.json());

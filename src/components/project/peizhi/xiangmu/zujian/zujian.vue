@@ -2,7 +2,7 @@
     <div class="module">
         <div class="left">
             <i class="iconfont icon-sousuo1"></i>
-            <input type="text" placeholder="搜索项目组件" >
+            <input type="text" placeholder="搜索项目组件" v-model="searchVal">
         </div>
         <button class="lx"><i class="iconfont icon-shezhi" style="vertical-align:-1px;"></i> 类型管理</button>
         <button class="xj">+ 新建模板</button>
@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody >
-                    <tr v-for="item of arr">
+                    <tr v-for="item of list">
                         <td style="text-align:left">
                             <img :src="item.i" alt="">
                             {{item.zujian}}
@@ -41,97 +41,41 @@
 export default {
     data(){
         return{
-            arr:[
-                {
-                    i:'imgs/6.png',
-                    zujian:'看板',
-                    beizhu:'用看板的方式分组展示任务',
-                    pingtai:[
-                        'iconfont icon-diannao',
-                        'iconfont icon-iphone',
-                        
-                        'iconfont icon-anzhuo'
-                    ]
-                },
-                {
-                    i:'imgs/7.png',
-                    zujian:'迭代',
-                    beizhu:'用于敏捷开发管理中的迭代管理，支持迭代统计、故事板及规划',
-                    pingtai:[
-                        'iconfont icon-diannao',
-                        'iconfont icon-iphone',
-                        
-                        'iconfont icon-anzhuo'
-                    ]
-                },
-                {
-                    i:'imgs/8.png',
-                    zujian:'列表',
-                    beizhu:'用列表的方式直观的展示任务',
-                    pingtai:[
-                        'iconfont icon-diannao',
-                        'iconfont icon-iphone',
-                        
-                        'iconfont icon-anzhuo'
-                    ]
-                },
-                {
-                    i:'imgs/9.png',
-                    zujian:'时间',
-                    beizhu:'用甘特图的方式展示任务，支持任务视图与人员视图',
-                     pingtai:[
-                         'iconfont icon-diannao',
-                        'iconfont icon-iphone',
-                        
-                        'iconfont icon-anzhuo'
-                    ]
-                },
-                {
-                    i:'imgs/10.png',
-                    zujian:'表格',
-                    beizhu:'用表格的方式展示任务，支持表头自定义',
-                     pingtai:[
-                         'iconfont icon-diannao',
-                        'iconfont icon-iphone',
-                        
-                        'iconfont icon-anzhuo'
-                    ]
-                },
-                {
-                    i:'imgs/11.png',
-                    zujian:'报表',
-                    beizhu:'提供基于任务的多维度统计，可以自定义统计报表',
-                     pingtai:[
-                         'iconfont icon-diannao',
-                        'iconfont icon-iphone',
-                        
-                        'iconfont icon-anzhuo'
-                    ]
-                },
-                {
-                    i:'imgs/12.png',
-                    zujian:'日历',
-                    beizhu:'用日历的方式直观的展示任务',
-                    pingtai:[
-                        'iconfont icon-diannao',
-                        'iconfont icon-iphone',
-                        
-                        'iconfont icon-anzhuo'
-                    ]
-                },
-                {
-                    i:'imgs/13.png',
-                    zujian:'工时',
-                    beizhu:'用于项目管理中的工时查看、统计与导出',
-                    pingtai:[
-                        'iconfont icon-diannao',
-                        'iconfont icon-iphone',
-                        
-                        'iconfont icon-anzhuo'
-                    ]
-                }
-            ]
+            searchVal:'',
+            letter:'', 
         }
+    },
+    created() {
+        // 发送默认 GETALL
+        this.$store.dispatch("YJHGETALL");
+    },
+     computed:{
+        list: function(){
+            var _this = this;
+            //逻辑-->根据input的value值筛选goodsList中的数据
+            var arrByZM = [];//声明一个空数组来存放数据
+            for (var i=0;i<this.$store.state.YJHtodos.length;i++){
+                //for循环数据中的每一项（根据name值）
+                if(this.$store.state.YJHtodos[i].zujian.search(this.searchVal) != -1){
+                    //判断输入框中的值是否可以匹配到数据，如果匹配成功
+                    arrByZM.push(this.$store.state.YJHtodos[i]);
+                    //向空数组中添加数据
+                }
+            }
+            //逻辑-->升序降序排列  false: 默认从小到大  true：默认从大到小
+            //判断，如果要letter不为空，说明要进行排序
+            if(this.letter != ''){
+                arrByZM.sort(function( a , b){
+                    if(_this.original){
+                        return b[_this.letter] - a[_this.letter];
+                    }else{
+                        return a[_this.letter] - b[_this.letter];
+                    }
+                });
+            }
+            //一定要记得返回筛选后的数据
+            return arrByZM;
+        },
     }
 }
 </script>

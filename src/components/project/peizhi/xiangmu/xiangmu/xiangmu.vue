@@ -1,18 +1,77 @@
 <template>
     <div class="module">
+        <!-- class="animated fadeInDown" -->
+        <div class="mask" v-show="isShow" ></div>
+        <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+            <div class="modal-backdrop" v-show="isShow">
+                <header class="modal-header">
+                    <a href="javascript:;" class="modal-close ng-scope" @click="xiaoshi"><i class="iconfont icon-guanbi"></i></a>
+                    <h3 class="modal-title ng-binding ng-scope">
+                        新建项目模板
+                    </h3>
+                </header>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ng-binding">模板名称</label>
+                        <input type="text" class="form-control" v-model="mingcheng">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ng-binding">模板类型</label>
+                        <input type="text" class="form-control"  v-model="leixing">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ng-binding">备注</label>
+                        <textarea class="form-control"  v-model="beizhu"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ng-binding">图标</label>
+                        <p style="padding-left:10px;overflow:hidden">
+                            <span v-for="(item,index) in tubiao" :class="{active:index == num}"@click="tab(index)">
+                                <img :src="item">
+                            </span>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <div class="offset-sm-2 col-sm-10 ">
+                            <div class="btn-pair">
+                                <button class="btn btn-primary ng-binding" @click="add">确定</button>
+                                <button class="btn btn-link btn-link-info ng-binding" @click="xiaoshi">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+
+        <div class="mask" v-show="isShow1" ></div>
+        <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+            <div class="modal-backdrop" v-show="isShow1" style="height:180px">
+                <header class="modal-header">
+                    <a href="javascript:;" class="modal-close ng-scope" @click="xiaoshi1"><i class="iconfont icon-guanbi"></i></a>
+                    <h3 class="modal-title ng-binding ng-scope">
+                        删除项目模板
+                    </h3>
+                </header>
+                <div style="padding:10px 30px">
+                    <p style="font-size:16px">确定要删除<span style="color:red;">{{xm}}</span>吗</p>
+                    <button class="btn btn-primary ng-binding" style="margin-left:0;margin-top:20px;" @click="shanchu">确认</button>
+                    <button class="btn btn-link btn-link-info ng-binding" style="margin-top:20px;" @click="xiaoshi1">取消</button>
+                </div>
+            </div>
+        </transition>
+       
         <div class="left">
             <i class="iconfont icon-sousuo1"></i>
             <input type="text" placeholder="搜索项目模板"  v-model="searchVal">
         </div>
-        
         <button class="lx"><i class="iconfont icon-shezhi" style="vertical-align:-1px;"></i> 类型管理</button>
-        <button class="xj">+ 新建模板</button>
+        <button class="xj" @click="xianshi">+ 新建模板</button>
         <div class="pad">
             <table>
                 <thead>
                     <tr>
                         <th style="width:20%">项目模板</th>
-                        <th>备注</th>
+                        <th>备注</th> 
                         <th>类型</th>
                         <th>状态</th>
                         <th>操作</th>
@@ -37,7 +96,7 @@
                         </td>
                         <td>
                             <span>修改</span>
-                            <span>删除</span>
+                            <span @click="del(item.id,item.xiangmu)">删除</span>
                         </td>
                     </tr>
                 </tbody>
@@ -46,53 +105,28 @@
     </div>
 </template>
 <script>
+// import  'animate.css'
+import 'vue2-animate/dist/vue2-animate.min.css';
 export default {
     data(){
         return{
-            // goodsList:[
-            //     {
-            //         i:'imgs/1.png',
-            //         xiangmu:'事物处理',
-            //         beizhu:'适用于最简单的事务管理',
-            //         leixing:'通用',
-            //         zhuangtai:'已启用',
-            //         qiyong:true,
-            //     },
-            //     {
-            //         i:'imgs/2.png',
-            //         xiangmu:'项目管理',
-            //         beizhu:'适用于通用的项目管理',
-            //         leixing:'通用',
-            //         zhuangtai:'已启用',
-            //         qiyong:true,
-            //     },
-            //     {
-            //         i:'imgs/3.png',
-            //         xiangmu:'敏捷开发',
-            //         beizhu:'适用于敏捷研发管理，包括迭代、需求和缺陷',
-            //         leixing:'软件',
-            //         zhuangtai:'已启用',
-            //         qiyong:true,
-            //     },
-            //     {
-            //         i:'imgs/4.png',
-            //         xiangmu:'缺陷管理',
-            //         beizhu:'适用于缺陷管理',
-            //         leixing:'软件',
-            //         zhuangtai:'已启用',
-            //         qiyong:true,
-            //     },
-            //     {
-            //         i:'imgs/5.png',
-            //         xiangmu:'测试管理',
-            //         beizhu:'适用于测试用例管理',
-            //         leixing:'软件',
-            //         zhuangtai:'已启用',
-            //         qiyong:true,
-            //     },
-            // ],
+            isShow1:false,
+            isShow:false,
             searchVal:'',
             letter:'', 
+            tubiao:[
+                'imgs/1.png',
+                'imgs/2.png',
+                'imgs/3.png',
+                'imgs/4.png',
+                'imgs/5.png'
+            ],
+            mingcheng:'',
+            leixing:'',
+            beizhu:'',
+            num:0,
+            xm:'',
+            ids:''
         }
     },
     created() {
@@ -100,7 +134,61 @@ export default {
         this.$store.dispatch("GETALL");
     },
     methods:{
-        
+        xianshi(){
+            this.isShow=!this.isShow;
+        },
+        xiaoshi(){
+            this.isShow=false;
+        },
+        xiaoshi1(){
+            this.isShow1=false;
+        },
+        tab(index) {
+            this.num = index;
+        },
+        add(){
+            console.log(333);
+            // 如果为空 就 return 掉 什么都不做
+            if (this.leixing == "" || this.mingcheng == '' || this.beizhu=='' ) return;
+            // 随机一个8位id
+            var id = "";
+            var str = "741852qwertyuioplkjhgfdszxcvbnm0963";
+            for (var i = 0; i < 8; i++) {
+                //~~ 相当于parseInt
+                id += str[~~(Math.random() * str.length)];
+            }
+            // 发送add 新增命令
+            this.$store.dispatch("YJHADD", {
+                i:this.tubiao[this.num],
+                xiangmu:this.mingcheng,
+                beizhu:this.beizhu,
+                leixing:this.leixing,
+                zhuangtai:'未启用',
+                qiyong:false
+            });
+            // 点击后 清空 文本框
+            this.leixing = ""
+            this.beizhu = ""
+            this.mingcheng = ""
+            this.isShow=false
+        },
+        del(id,xiangmu) {
+            // 只需要一个id就行了
+            // this.$store.dispatch("YJHDEL", {
+            //     id: id
+            // });
+            this.ids=id;
+            this.xm=xiangmu;
+            this.isShow1=!this.isShow1;
+            
+        },
+        shanchu(){
+            console.log(566);
+            this.isShow1=!this.isShow1;
+            this.$store.dispatch("YJHDEL", {
+                id: this.ids
+            });
+        }
     },
     computed:{
         list: function(){
@@ -129,14 +217,117 @@ export default {
             //一定要记得返回筛选后的数据
             return arrByZM;
         },
-        todos(){
-            console.log(this.$store.state.todos)
-            return this.$store.state.todos;
-        }
     }
 }
 </script>
 <style lang="scss" scoped >
+    
+    .modal-close{
+        float: right;
+        text-decoration: none;
+    }
+    .btn-primary{
+        color: #fff;
+        background-color: #22d7bb;
+        border-color: #22d7bb;
+        margin-left: 70px;
+    }
+    .btn{
+        white-space: nowrap;
+        vertical-align: middle;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: .469rem 26px;
+        font-size: .875rem;
+        line-height: 1.5;
+        min-width: 106px;
+        border-radius: 1.25rem;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        outline: none;
+        cursor: pointer;
+    }
+    .mask{
+        padding-left: 70px;
+        left: -70px;top: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(178, 178, 178);
+        z-index: 999;
+        opacity: 0.5;
+    }
+    .modal-backdrop{
+        width: 660px;
+        height: 383px;
+        background-color: #fff;
+        position: absolute;
+        box-shadow: 0 0 1.5rem rgba(0,0,0,.4);
+        z-index: 9999;
+        border-radius: 5px;
+        top: 50%;
+        left: 50%;
+        margin-top: -300px;
+        margin-left: -330px;
+    }
+    .modal-header{
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid #eee;
+        box-sizing: border-box;
+        padding:0 30px;
+        line-height: 50px;
+        h3{
+            font-weight: 500;
+            font-size: 18px;
+        }
+    }
+    .modal-body{
+        padding: 20px 30px 30px 30px;
+        .form-group{
+            margin-top: 16px;
+            overflow: hidden;
+            label{
+                float: left;
+                color: #888;
+                font-size: 14px;
+                font-weight: 400;
+                text-align: right;
+                margin-bottom: 0;
+                padding-top: 6px;
+                width: 10%;
+            }
+            .form-control{
+                margin-left: 10px;
+                padding: .469rem .875rem;
+                font-size: .875rem;
+                float: left;
+                width: 80%;
+                line-height: 1.5;
+                color: #333;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #eee;
+                border-radius: .25rem;
+                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            }
+            span{
+                float: left;
+                width: 34px;
+                height: 34px;
+                border-radius: 5px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                border:1px solid #eee;
+                text-align: center;
+                img{
+                    margin-top: 5px;
+                }
+            }
+            span.active{
+                border: 1px solid #22d7bb;
+            }
+        }
+    }
     .qy{
         background: #22d7bb;
         padding: 5px 10px;
@@ -244,4 +435,5 @@ export default {
             }
         }
     }
+    
 </style>
