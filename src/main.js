@@ -298,28 +298,46 @@ const r = [
     path:'/network',
     component:Network.default,
     name:"云盘",
+     children:[
+      {
+          path: 'qiye',
+          component: require('./components/network/qiye/qiye.vue').default,
+          name: '企业网盘',
           children:[
             {
-                path: '/network/qiye',
-                component: require('./components/network/qiye/qiye.vue').default,
-                name: '企业网盘'
+              path: 'guanli',
+              component: require('./components/network/qiye/guanli/guanli.vue').default,
+              name: '缺陷管理'  
             },
             {
-                path: '/network/geren',
-                component: require('./components/network/geren/geren.vue').default,
-                name: '个人网盘'
+              path: 'gongxiang',
+              component: require('./components/network/qiye/gongxiang/gongxiang.vue').default,
+              name: '资源共享' 
             },
             {
-                path: '/network/yuwo',
-                component: require('./components/network/yuwo/yuwo.vue').default,
-                name: '与我共享'
-            },
-            {
-                path: '/network/del',
-                component: require('./components/network/del/del.vue').default,
-                name: '回收站'
-            }
+              path: 'zhidu',
+              component: require('./components/network/qiye/zhidu/zhidu.vue').default,
+              name: '公司制度'  
+           }
           ]
+          
+      },
+      {
+          path: 'geren',
+          component: require('./components/network/geren/geren.vue').default,
+          name: '个人网盘'
+      },
+      {
+          path: 'yuwo',
+          component: require('./components/network/yuwo/yuwo.vue').default,
+          name: '与我共享'
+      },
+      {
+          path: 'del',
+          component: require('./components/network/del/del.vue').default,
+          name: '回收站'
+      }
+     ]
   },{
     path:'/address',
     component:Address.default,
