@@ -142,7 +142,7 @@ export default {
 .le-b{
     
     width: 239px;
-    height: 631px;
+    height: 928px;
     background-color:#fff;
 }
 
@@ -237,7 +237,7 @@ list-style: none;
 .rv{
     float: left;
     width: 1610px;
-    height: 900px;
+    height: 1000px;
     background-color:#ddd;;
 }
 </style>

@@ -82,7 +82,7 @@
         </div>
        
 
-        <div class="file-item" v-for="item of wtodos">
+        <div class="file-item" v-for="item of filelist">
             <div class="file-name">
                 <img :src="item.url">
                 <span>{{item.name}}</span>
@@ -135,7 +135,7 @@
                  <input type="text" placeholder="输入文件夹的名称" class="form-control" v-model="value" @keydown.13="add()">
                     <br>
                  <p><span>所在位置</span><input type="text" placeholder="企业网盘"></p>
-                 <p><span>可见范围</span><input type="text" placeholder="公开:企业所有成员都可以看见文件"></p>
+                 <p><span>可见范围</span><input type="text" placeholde  r="公开:企业所有成员都可以看见文件"></p>
                  <button  @click="guan()" class="del2">确认</button><span @click="isShow=!isShow" class="qux">取消</span>
                  
                  
@@ -201,8 +201,7 @@ export default {
       }
     },
     created() {
-    var aaa=this.fieldUpload();
-    console.log(aaa);
+   
     // 发送默认 GETALL
      this.$store.dispatch("whGETALL");
    },
@@ -235,11 +234,7 @@ export default {
       this.isShow=false;
       var date = new Date();
       var sj=this.sj();
-      var shuju=this.fieldUpload();
-      var name=shuju.name;
-      var size=shuju.size;
-      var url=shuju.url;
-      console.log(shuju);
+ 
       // 如果为空 就 return 掉 什么都不做
       if (this.value == "") return;
       // 随机一个8位id
@@ -254,9 +249,6 @@ export default {
         title: this.value,
         id: id,
         time:sj,
-        name:name,
-        size:size,
-        url:url,
       });
       
       this.value = "";
@@ -270,7 +262,7 @@ export default {
      },
       //文件上传方法
       fileClic(){
-        this.add();
+
         this.$refs.fileupload.click();
       },
 
@@ -291,7 +283,7 @@ export default {
           console.log(file)
           this.filelist.push(file);
         })
-           return file      
+               
       },
        
   },
