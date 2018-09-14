@@ -29,6 +29,9 @@
       "filebgc": "rgb(135,63,113)"
     }
   ],
+
+
+
   "myxthings": [
     {
       "title": "貂蝉",
@@ -36,14 +39,6 @@
       "end": 20180909,
       "color": "#098876",
       "id": 1,
-      "isshow": true
-    },
-    {
-      "title": "杨贵妃",
-      "start": 20180913,
-      "end": 20180917,
-      "color": "#246783",
-      "id": 2,
       "isshow": true
     },
     {
@@ -55,19 +50,19 @@
       "isshow": true
     },
     {
-      "start": 20180911,
-      "end": 20180913,
-      "color": "red",
-      "id": "0krwms00",
-      "title": "笑眯眯",
-      "isshow": true
-    },
-    {
       "start": 20180925,
       "end": 20180928,
       "color": "#234356",
       "id": "o1e4yexi",
       "title": "孙尚香",
+      "isshow": true
+    },
+    {
+      "start": 20180814,
+      "end": 20180817,
+      "color": "red",
+      "id": "h0bp33hu",
+      "title": "杨贵妃",
       "isshow": true
     }
   ],
@@ -155,6 +150,12 @@
     "id": 1,
     "isshow": true
   },
+
+
+
+
+
+
   "YmYthings": [
     {
       "i": "imgs/1.png",

@@ -525,7 +525,10 @@ const store = new Vuex.Store({
     rytodos: [],
     YJHtodos:[],
     wangpanfile: [],
-    wtodos: []
+    wtodos: [],
+    mylist:[],
+    teamlist:[],
+    peoplelist:[]
   },
   mutations: {
     YJHCHANGETITLE(state, payload){
@@ -580,42 +583,42 @@ const store = new Vuex.Store({
     ADD(state, payload) {
       console.log(state, payload)
     },
-    XGETALL(state, payload) {
+    XGETALL(state,payload){
       state.mythings = payload[0];
       state.teamthings = payload[1];
       state.peoplethings = payload[2];
       var arrlist = [];
-      for (var i = 0; i < payload[0].length; i++) {
+      for(var i=0;i<payload[0].length;i++){
         arrlist.push(payload[0][i]);
       }
-      for (var a = 0; a < payload[1].length; a++) {
+      for(var a=0;a<payload[1].length;a++){
         arrlist.push(payload[1][a]);
       }
-      for (var b = 0; b < payload[2].length; b++) {
+      for(var b=0;b<payload[2].length;b++){
         arrlist.push(payload[2][b]);
       }
       state.allthings = arrlist;
-      console.log(state.mythings, state.peoplethings, state.teamthings);
+      console.log(state.mythings,state.peoplethings,state.teamthings);
     },
-    XGETMY(state, payload) {
+    XGETMY(state,payload){
       state.mythings = payload;
       console.log(state.mythings);
     },
-    XGETTEAM(state, payload) {
+    XGETTEAM(state,payload){
       state.teamthings = payload;
       console.log(state.teamthings);
     },
-    XGETPEOPLE(state, payload) {
+    XGETPEOPLE(state,payload){
       state.peoplethings = payload;
       console.log(state.peoplethings);
     },
-    XCHANGE(state, payload) {
-      state.actionthings = [];
+    XCHANGE(state,payload){
+      state.actionthings=[];
       state.actionthings.push(payload);
     },
-    XADDMY(state, payload) {
+    XADDMY(state,payload){
       state.mythings.push(payload);
-      console.log(state.mythings, payload);
+      console.log(state.mythings,payload);
     },
     XADDDATA(state,payload){
       state.teamthings.push(payload);
@@ -623,16 +626,48 @@ const store = new Vuex.Store({
     },
     // XPEOPLECHANGE  XTEAMCHANGE
     XMYCHANGE(state,payload){
-      state.mylist.push(payload);
-      console.log(state.mylist,payload);
+      XMYCHANGEstate.mythings.forEach(function(item){
+				if(item.id == payload.id){
+					item = payload
+				}
+			});
+      // state.mylist.push(payload);
+      console.log(state.mythings,payload);
     },
     XPEOPLECHANGE(state,payload){
-      state.teamlist.push(payload);
+      state.peoplethings.forEach(function(item){
+				if(item.id == payload.id){
+					item = payload
+				}
+			});
+      // state.teamlist.push(payload);
       console.log(state.teamlist,payload);
     },
     XTEAMCHANGE(state,payload){
-      state.peoplelist.push(payload);
-      console.log(state.peoplelist,payload);
+      state.teamthings.forEach(function(item){
+				if(item.id == payload.id){
+					item = payload
+				}
+			});
+      // state.teamthings.push(payload);
+      console.log(state.teamthings,payload);
+    },
+    XDELDATA(state,payload){
+      if(payload.sunname=="myxthings"){
+        state.mythings = state.mythings.filter(function(item){
+          return item.id != payload.sundata.id
+        })
+      }else if(payload.sunname=="teamthings"){
+        state.teamthings = state.teamthings.filter(function(item){
+          return item.id != payload.sundata.id
+        })
+      }else{
+        state.peoplethings = state.peoplethings.filter(function(item){
+          return item.id != payload.sundata.id
+        })
+      }
+      
+      console.log(payload);
     },
     GETALL(state, payload) {
       state.todos = payload;
@@ -751,44 +786,44 @@ const store = new Vuex.Store({
       console.log(payload);
       commit("ADD", payload);
     },
-    async XGETMY({ commit }, payload) {
+    async XGETMY({commit},payload){
       var data = await fetch("/myxthings").then(res => res.json());
-      commit("XGETMY", data)
+			commit("XGETMY",data)
     },
-    async XGETTEAM({ commit }, payload) {
+    async XGETTEAM({commit},payload){
       var data = await fetch("/teamthings").then(res => res.json());
-      commit("XGETATEAM", data)
+			commit("XGETATEAM",data)
     },
-    async XGETPEOPLE({ commit }, payload) {
+    async XGETPEOPLE({commit},payload){
       var data = await fetch("/peoplethings").then(res => res.json());
-      commit("XGETAPEOPLE", data)
+			commit("XGETAPEOPLE",data)
     },
-    async XGETALL({ commit }, payload) {
+    async XGETALL({commit},payload){
       var data1 = await fetch("/myxthings").then(res => res.json());
       var data2 = await fetch("/teamthings").then(res => res.json());
       var data3 = await fetch("/peoplethings").then(res => res.json());
-      var arrlist = [data1, data2, data3];
-      commit("XGETALL", arrlist);
+      var arrlist = [data1,data2,data3];
+			commit("XGETALL",arrlist);
     },
-    async XCHANGE({ commit }, payload) {
-      var data = await fetch("/actionthings/", {
-        "method": "POST",
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      }).then(res => res.json());
-      commit("XCHANGE", data);
+    async XCHANGE({commit},payload){
+      var data = await fetch("/actionthings/",{
+				"method" :"POST",
+				"headers":{
+					"Content-Type": "application/json"
+				},
+				body:JSON.stringify(payload)
+			}).then(res => res.json()); 
+			commit("XCHANGE",data);
     },
-    async XADDMY({ commit }, payload) {
-      var data = await fetch("/myxthings/", {
-        "method": "POST",
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      }).then(res => res.json());
-      commit("XADDMY", data);
+    async XADDMY({commit},payload){
+      var data = await fetch("/myxthings/",{
+				"method" :"POST",
+				"headers":{
+					"Content-Type": "application/json"
+				},
+				body:JSON.stringify(payload)
+			}).then(res => res.json()); 
+			commit("XADDMY",data);
     },
     async XADDDATA({commit},payload){
       var data = await fetch("/teamthings/",{
@@ -801,7 +836,7 @@ const store = new Vuex.Store({
 			commit("XADDDATA",data);
     },
     async XMYCHANGE({commit},payload){
-      var data = await fetch("/actionthings/",{
+      var data = await fetch("/actionthings/"+payload.id,{
 				"method" :"POST",
 				"headers":{
 					"Content-Type": "application/json"
@@ -811,7 +846,7 @@ const store = new Vuex.Store({
 			commit("XMYCHANGE",data);
     },
     async XTEAMCHANGE({commit},payload){
-      var data = await fetch("/actionthings/",{
+      var data = await fetch("/actionthings/"+payload.id,{
 				"method" :"POST",
 				"headers":{
 					"Content-Type": "application/json"
@@ -821,7 +856,7 @@ const store = new Vuex.Store({
 			commit("XTEAMCHANGE",data);
     },
     async XPEOPLECHANGE({commit},payload){
-      var data = await fetch("/actionthings/",{
+      var data = await fetch("/actionthings/"+payload.id,{
 				"method" :"POST",
 				"headers":{
 					"Content-Type": "application/json"
@@ -829,6 +864,13 @@ const store = new Vuex.Store({
 				body:JSON.stringify(payload)
 			}).then(res => res.json()); 
 			commit("XPEOPLECHANGE",data);
+    },
+    async XDELDATA({commit},payload){
+      console.log(payload);
+      var data = await fetch("/"+payload.sunname+"/" + payload.sundata.id,{
+				"method" :"DELETE"
+			}).then(res => res.json()); 
+			commit("XDELDATA",payload)
     },
     async whGETALL(context, payload) {
       //请求数据

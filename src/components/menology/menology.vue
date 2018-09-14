@@ -42,15 +42,15 @@
             <div class="myday">
                 <p @click="mythingsshowfun"><i class="iconfont icon-shu"></i>我的日程<b class="iconfont icon-wifi"></b></p>
                 <ul v-show="mythingsshow"  class=" animated fadeInLeft">
-                    <li v-for="item of mythings" @click="adddaythings(item)" ><i :style="{background:item.color}"></i>{{item.title}}<b></b></li>
+                    <li v-for="item of mythings" @click="myadddaythings(item)" ><i :style="{background:item.color}"></i>{{item.title}}<b></b></li>
                 </ul>
                 <p @click="teamthingsshowfun"><i class="iconfont icon-xiaotuziCduan_"></i>团队日程<b @click="mydayhideshow = !mydayhideshow" class="iconfont icon-diandiandian"></b></p>
                 <ul v-show="teamthingsshow"  class=" animated fadeInLeft">
-                    <li v-for="item of teamthings" @click="adddaythings(item)"><i :style="{background:item.color}"></i>{{item.title}}<b></b></li>
+                    <li v-for="item of teamthings" @click="teamadddaythings(item)"><i :style="{background:item.color}"></i>{{item.title}}<b></b></li>
                 </ul>
                 <p @click="peoplethingsshowfun"><i class="iconfont icon-xiaotuziCduan_"></i>成员日程<b class="iconfont icon-iconjia"></b></p>
                 <ul v-show="peoplethingsshow"  class=" animated fadeInLeft">
-                    <li v-for="item of peoplethings" @click="adddaythings(item)"><i :style="{background:item.color}"></i>{{item.title}}<b></b></li>
+                    <li v-for="item of peoplethings" @click="peopleadddaythings(item)"><i :style="{background:item.color}"></i>{{item.title}}<b></b></li>
                 </ul>
                 <div class="mydayhide" v-show="mydayhideshow">
                     <ul>
@@ -390,40 +390,59 @@ export default {
         mythingsshowfun(){
             this.mythingsshow = !this.mythingsshow;
             this.downda="my";
-            console.log(this.downda)
+            // console.log(this.downda)
         },
         teamthingsshowfun(){
             this.teamthingsshow = !this.teamthingsshow;
             this.downda="team";
-            console.log(this.downda)
+            // console.log(this.downda)
         },
         peoplethingsshowfun(){
             this.peoplethingsshow = !this.peoplethingsshow;
             this.downda="people";
-            console.log(this.downda)
+            // console.log(this.downda)
         },
         adddaythings(item){
             this.$store.dispatch("XCHANGE",item);
             this.downda="qita";
             this.theyear = item.start.toString().substr(0,4);
             this.themonth = item.end.toString().substr(4,2);
-            console.log(this.theyear,this.themonth)
+            // console.log(this.theyear,this.themonth)
         },
         myadddaythings(item){
-            if(item.isshow){
-                this.$store.dispatch("XMYCHANGE",item);
-            }else{
-                this.$store.dispatch("XMYCHANGE",item);
-                this.downda="qita";
-                this.theyear = item.start.toString().substr(0,4);
-                this.themonth = item.end.toString().substr(4,2);
-            }
+            item.isshow = !item.isshow;
+            console.log(item)
+            this.$store.dispatch("XMYCHANGE",item);
+            this.theyear = item.start.toString().substr(0,4);
+            this.themonth = item.end.toString().substr(4,2);
+            // if(item.isshow){
+            //     this.$store.dispatch("XMYCHANGE",item);
+            // }else{
+            //     this.$store.dispatch("XMYCHANGE",item);
+            //     this.downda="qita";
+            //     this.theyear = item.start.toString().substr(0,4);
+            //     this.themonth = item.end.toString().substr(4,2);
+            // }
+        },
+        teamadddaythings(item){
+            item.isshow = !item.isshow;
+            console.log(item)
+            this.$store.dispatch("XTEAMCHANGE",item);
+            this.theyear = item.start.toString().substr(0,4);
+            this.themonth = item.end.toString().substr(4,2);
+        },
+        peopleadddaythings(item){
+            item.isshow = !item.isshow;
+            console.log(item)
+            this.$store.dispatch("XPEOPLECHANGE",item);
+            this.theyear = item.start.toString().substr(0,4);
+            this.themonth = item.end.toString().substr(4,2);
         },
         woListScroll(event) {
             if (event.srcElement.scrollHeight - (event.srcElement.scrollTop + event.srcElement.clientHeight) == 0) {
-            　　console.log(event);
+            // 　　console.log(event);
             }
-            console.log(event);
+            // console.log(event);
         },
         postadddata(){
             this.newscheduleboxshow = !this.newscheduleboxshow;
@@ -448,18 +467,19 @@ export default {
                 end:endnum,
                 color:"red",
                 id:idnum,
-                title:this.addstr
+                title:this.addstr,
+                isshow: true
             }
             this.$store.dispatch("XADDMY",obj);
-            console.log(startnum,endnum);
+            // console.log(startnum,endnum);
         },
         childaddstr(data){
-            console.log(data);
+            // console.log(data);
             this.startenddata.push(data);
         },
         sunchildaddstr(data){
             this.newscheduleboxshow = data;
-            console.log(data)
+            // console.log(data)
         },
         changcoloridx(index){
             this.theindexnumber = index;
@@ -492,7 +512,8 @@ export default {
                 color:"#"+this.colorlist[this.theindexnumber],
                 start:str,
                 end:str,
-                id:idnum
+                id:idnum,
+                isshow: true
             }
             this.$store.dispatch("XADDDATA",o);
         }
