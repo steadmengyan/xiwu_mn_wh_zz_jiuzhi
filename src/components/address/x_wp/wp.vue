@@ -2,7 +2,7 @@
       <div class="da">
           <div class="shang">
               <img src="../../../assets/ke.png">
-              <p>项目助手</p>
+              <p>网盘助手</p>
               <span>@bot_drive</span>
               <div class="xian"></div>
           <div class="xia">

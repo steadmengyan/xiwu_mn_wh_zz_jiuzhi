@@ -466,10 +466,15 @@ const r = [
               path: '/address/v_xt',
               component: require('./components/address/v_xt/xt.vue').default,
               name: '小特机器人'
-            },{
+            }
+            ,{
               path: '/address/M',
               component: require('./components/address/M/M.vue').default,
               name: 'M'
+            },
+            {
+              path:'/address/',
+              redirect:'/address/M'
             }
             
             

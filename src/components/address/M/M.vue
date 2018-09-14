@@ -74,7 +74,6 @@ export default {
 <style scoped>
     .iconfont{
         font-size: 22px;
-       
         padding-right: 5px;
         padding-top: 10px;
         color: #ccc;

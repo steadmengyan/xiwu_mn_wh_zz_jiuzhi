@@ -72,6 +72,9 @@ export default {
         position: relative;
         top:48px;
     }
+    .lll{
+        border-radius:50%;
+    }
     .xia span:nth-child(2){
     margin-left: 40px;
     /* margin-top: 60px; */

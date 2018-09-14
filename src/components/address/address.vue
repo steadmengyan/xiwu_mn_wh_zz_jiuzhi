@@ -17,6 +17,7 @@
                 </div>
             </div>
             <div class="add_list">
+                <p class="jiantou"></p>
                 <a href="#" @click="show()" class="zuqun">群组</a>
                 <div class="add_list_ul" v-show="!isShow" :style='{height:count}'>
                     <ul>
@@ -28,6 +29,7 @@
                 </div>
             </div>
             <div class="add_list">
+                <p class="jiantou"></p>
                 <a href="#" @click="show1()">机器人</a>
                 <div class="add_list_ul" v-show="!isShow1" :style="{height:height1}">
                     <ul>
@@ -100,7 +102,7 @@ export default {
             M:[
                  {
                     title:'M',
-                    url:'/address/M',
+                    url:'/address/M/',
                     img:'/dist/MM.png'
                 }
             ],
@@ -153,6 +155,15 @@ html{
     height: 20px;
     border-top:1px solid #ccc;
     
+}
+.jiantou{
+    border-style:dashed dashed dashed solid;
+   border-color:transparent transparent transparent #ccc;
+   border-width:10px;
+   width:0;height:0;
+    position: relative;
+    top:21px;
+    left:-5px;
 }
 .main{
     width: 100%;
@@ -241,6 +252,7 @@ html{
        left:5px; 
     }
     .add_list_ul ul  li{
+        border-right:3px solid #22d7bb; 
         height: 30px;
     }
     .add_list_ul ul  li img{
@@ -251,16 +263,15 @@ html{
         border-radius: 24px;
     }
     .add_list_ul {
-        // overflow: hidden;
-        // transition: all 3s ease;
-        animation: add 1s  alternate forwards;
+        overflow: hidden;
+        animation: add 1s  ease forwards;
     } 
     @keyframes add{
         0%{
             height: 0;
         }
         100%{
-            height: 90px;
+            height: 113px;
         }
     }
 .rv{
